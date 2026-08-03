@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Método Papai Presente — As Aventuras da Ester — Ep. 2</title>
+<!--
+  ============================================================
+  MÉTODO PAPAI PRESENTE
+  Episódio 02 — O Jardim das Cores Perdidas
+
+  Este HTML é um ROTEIRO VIVO, não um jogo infantil.
+  Quem opera a navegação é o PAI. A criança não toca no aparelho —
+  ela participa por videochamada, ouvindo e respondendo em voz alta.
+
+  Cada tela tem duas camadas:
+  1) O PALCO — o que a Ester vê: cores, personagens, animações, diploma.
+  2) O CARTÃO DO PAPAI — instruções discretas, só para o pai ler,
+     com a fala sugerida entre aspas.
+
+  ÁUDIO COM A VOZ DO PAPAI (opcional)
+  Coloque uma pasta chamada "audio" ao lado deste arquivo, contendo:
+    audio/audio01.mp3  "Oi, Ester! Que bom te ver!"
+    audio/audio02.mp3  "Vamos abrir a carta e ajudar a Lili?"
+    audio/audio03.mp3  "Uauu, você conseguiu!"
+    audio/audio04.mp3  "As cores voltaram! Que descoberta incrível!"
+    audio/audio05.mp3  "Vamos ouvir uma historinha da Lili?"
+    audio/audio06.mp3  "Parabéns, Ester!"
+    audio/audio07.mp3  "O papai ama passar esse tempo com você."
+    audio/audio08.mp3  "Até a nossa próxima aventura!"
+  Se os arquivos não existirem, o HTML funciona normalmente —
+  os efeitinhos sonoros (sintetizados, sem arquivo nenhum) continuam ativos.
+  Toque no ícone ℹ️ no canto para reler estas instruções dentro do app.
+  ============================================================
+-->
+<style>
+  :root{
+    --ceu:#8ED8F8;
+    --ceu-claro:#C9ECFB;
+    --creme:#FFFBF2;
+    --sol:#FFCE45;
+    --coral:#FF7A5C;
+    --folha:#4FB477;
+    --ameixa:#4A3B78;
+    --petala:#FF9EC4;
+    --roxo:#9B7BE0;
+    --sombra: 0 10px 25px rgba(74,59,120,0.25);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+
+  *{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html,body{
+    margin:0; padding:0; overflow:hidden;
+    height: 100vh;
+    height: 100dvh;
+    width: 100vw;
+    font-family: -apple-system, "Segoe UI Rounded", "SF Pro Rounded", system-ui, "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(180deg, var(--ceu) 0%, var(--ceu-claro) 55%, #FFF6E0 100%);
+    color: var(--ameixa);
+    touch-action: manipulation;
+  }
+
+  #app{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 480px;
+    display:flex;
+    flex-direction: column;
+    max-width: 560px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  /* ---------- Cenário do jardim (fundo), presente nas telas do jardim ---------- */
+  #sky{ position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none; transition: filter 1.8s ease, opacity 1.8s ease; }
+  #sky.sem-cor{ filter: grayscale(1) brightness(0.92); }
+  .sun{
+    position:absolute; top:6%; right:8%; width:70px; height:70px; border-radius:50%;
+    background: radial-gradient(circle at 35% 35%, #FFF3B0, var(--sol) 70%);
+    box-shadow: 0 0 40px rgba(255,206,69,0.7);
+    animation: pulse-sun 4s ease-in-out infinite;
+  }
+  @keyframes pulse-sun{ 0%,100%{ transform: scale(1);} 50%{ transform: scale(1.08);} }
+  .cloud{ position:absolute; background:#fff; border-radius:50px; opacity:0.9; animation: drift linear infinite; }
+  .cloud:before, .cloud:after{ content:""; position:absolute; background:#fff; border-radius:50%; }
+  .cloud1{ width:90px; height:32px; top:12%; left:-20%; animation-duration: 38s; }
+  .cloud1:before{ width:46px; height:46px; top:-22px; left:10px; }
+  .cloud1:after{ width:34px; height:34px; top:-14px; left:50px; }
+  .cloud2{ width:60px; height:24px; top:22%; left:-15%; animation-duration: 26s; animation-delay: -8s;}
+  .cloud2:before{ width:32px; height:32px; top:-16px; left:6px; }
+  .cloud2:after{ width:24px; height:24px; top:-10px; left:32px; }
+  @keyframes drift{ from{ transform: translateX(0);} to{ transform: translateX(160vw);} }
+  .hill{ position:absolute; bottom:0; left:0; width:100%; height:16%; background: var(--folha); border-radius: 50% 50% 0 0 / 100% 100% 0 0; transform: scaleX(1.4); }
+  .hill.back{ background:#63C68A; height:12%; opacity:0.8; }
+  .flower-bg{ position:absolute; bottom:2%; font-size: 22px; animation: sway 3s ease-in-out infinite; }
+  @keyframes sway{ 0%,100%{ transform: rotate(-6deg);} 50%{ transform: rotate(6deg);} }
+  .fly-across{ position:absolute; font-size:20px; animation: fly 14s linear infinite; }
+  @keyframes fly{ 0%{ transform: translate(-10vw, 0);} 100%{ transform: translate(120vw, -10px);} }
+
+  /* ---------- Barra de progresso ---------- */
+  #progress-wrap{ position:relative; z-index:5; padding: 14px 44px 6px 18px; }
+  #progress-track{ width:100%; height:10px; background: rgba(255,255,255,0.6); border-radius: 20px; overflow:hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.08); }
+  #progress-fill{ height:100%; width:0%; background: linear-gradient(90deg, var(--coral), var(--sol)); border-radius:20px; transition: width 0.5s ease; }
+
+  /* ---------- Botão de informação (instruções de áudio) ---------- */
+  #info-btn{
+    position:absolute; top:10px; right:12px; z-index:20; width:34px; height:34px;
+    border-radius:50%; border:none; background:rgba(255,255,255,0.85); font-size:1.1rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15); cursor:pointer;
+  }
+  #info-modal{
+    position:fixed; inset:0; z-index:100; background:rgba(30,20,60,0.55);
+    display:none; align-items:center; justify-content:center; padding:24px;
+  }
+  #info-modal.open{ display:flex; }
+  #info-modal .box{
+    background:#fff; border-radius:24px; padding:22px; max-width:440px; max-height:80vh; overflow-y:auto;
+    box-shadow: var(--sombra); text-align:left; font-size:0.92rem; line-height:1.5;
+  }
+  #info-modal h3{ margin-top:0; color:var(--coral); }
+  #info-modal code{ background:#F3EFFB; padding:2px 6px; border-radius:6px; }
+  #info-modal .btn{ margin-top:14px; }
+
+  /* ---------- Palco principal ---------- */
+  #stage{ position:relative; z-index:2; flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 6px 20px; overflow-y:auto; }
+
+  .card{ background: var(--creme); border-radius: 32px; box-shadow: var(--sombra); padding: 24px 22px; width:100%; text-align:center; position:relative; animation: pop-in 0.5s cubic-bezier(.26,1.4,.5,1); }
+  @keyframes pop-in{ from{ transform: scale(0.85); opacity:0;} to{ transform: scale(1); opacity:1;} }
+
+  h1.title-plaque{
+    background: #fff; border-radius: 24px; padding: 14px 18px; box-shadow: var(--sombra);
+    font-size: 1.5rem; margin: 0 auto 6px; color: var(--coral); letter-spacing: 0.5px;
+    text-shadow: 2px 2px 0 rgba(74,59,120,0.12); border: 4px dashed var(--sol);
+  }
+  .episode-tag{ display:inline-block; margin-top:10px; background: var(--ameixa); color:#fff; padding:6px 16px; border-radius:20px; font-weight:700; font-size:0.95rem; }
+  .episode-name{ margin-top:8px; font-size:1.15rem; font-weight:700; color: var(--ameixa); }
+  .big-emoji{ font-size: 4.2rem; line-height:1; }
+  p.speech{ font-size:1.2rem; line-height:1.5; font-weight:600; color: var(--ameixa); margin: 10px 0; }
+
+  /* ---------- Cartão do papai (instruções discretas) ---------- */
+  .papai-card{
+    margin-top: 16px; text-align:left; background: #F3EFFB; border: 2px dashed var(--ameixa);
+    border-radius: 18px; padding: 12px 14px; font-size: 0.92rem; color: var(--ameixa); line-height:1.45;
+  }
+  .papai-card .tag{
+    display:inline-block; background: var(--ameixa); color:#fff; font-size:0.72rem; font-weight:800;
+    padding: 3px 10px; border-radius:12px; margin-bottom:6px; letter-spacing:0.5px;
+  }
+  .papai-card q{ font-style: italic; }
+
+  /* ---------- Botões ---------- */
+  .btn{
+    font-family:inherit; border:none; cursor:pointer; font-weight:800; font-size:1.1rem;
+    padding: 15px 24px; border-radius: 22px; color:#fff;
+    background: linear-gradient(180deg, var(--coral), #E8593F);
+    box-shadow: 0 6px 0 #C24630, 0 8px 16px rgba(0,0,0,0.15);
+    margin: 8px 6px; transition: transform 0.08s ease; min-width: 120px;
+  }
+  .btn:active{ transform: translateY(4px); box-shadow: 0 2px 0 #C24630, 0 4px 10px rgba(0,0,0,0.15); }
+  .btn.secondary{ background: linear-gradient(180deg, #FFE07D, var(--sol)); box-shadow: 0 6px 0 #D9A521, 0 8px 16px rgba(0,0,0,0.15); color: var(--ameixa); }
+  .btn.secondary:active{ box-shadow: 0 2px 0 #D9A521, 0 4px 10px rgba(0,0,0,0.15); }
+  .btn.leaf{ background: linear-gradient(180deg, #7BD9A0, var(--folha)); box-shadow: 0 6px 0 #368A57, 0 8px 16px rgba(0,0,0,0.15); }
+  .btn.leaf:active{ box-shadow: 0 2px 0 #368A57, 0 4px 10px rgba(0,0,0,0.15); }
+  .btn.roxo{ background: linear-gradient(180deg, #BBA3F2, var(--roxo)); box-shadow: 0 6px 0 #6F53B8, 0 8px 16px rgba(0,0,0,0.15); }
+  .btn.roxo:active{ box-shadow: 0 2px 0 #6F53B8, 0 4px 10px rgba(0,0,0,0.15); }
+  .btn.huge{ font-size:1.35rem; padding: 20px 32px; border-radius: 28px; }
+  .btn:disabled{ opacity:0.45; cursor:default; }
+  .btn-row{ display:flex; flex-wrap:wrap; justify-content:center; margin-top:12px; }
+
+  /* ---------- Envelope (Tela 1) ---------- */
+  .envelope-scene{ background: radial-gradient(ellipse at top, #2b2560, #140f33); border-radius: 32px; padding: 30px 20px; color:#fff; position:relative; overflow:hidden; min-height: 220px; }
+  .envelope-scene .star{ position:absolute; background:#fff; border-radius:50%; animation: twinkle 2.2s ease-in-out infinite; }
+  @keyframes twinkle{ 0%,100%{ opacity:0.3;} 50%{ opacity:1;} }
+  .envelope{ font-size:4.5rem; animation: envelope-glow 1.6s ease-in-out infinite; }
+  @keyframes envelope-glow{ 0%,100%{ filter: drop-shadow(0 0 6px #FFE07D);} 50%{ filter: drop-shadow(0 0 20px #FFE07D);} }
+  .envelope-scene p.speech{ color:#EFE9FF; }
+  .envelope-scene .papai-card{ background: rgba(255,255,255,0.12); border-color:#EFE9FF; color:#EFE9FF; }
+  .envelope-scene .papai-card .tag{ background:#EFE9FF; color:var(--ameixa); }
+
+  /* ---------- Lili, a borboleta (SVG assinatura) ---------- */
+  .lili-wrap{ display:flex; justify-content:center; margin: 6px 0 10px; }
+  .lili-wrap svg{ width:80px; height:80px; animation: lili-flutter 2.4s ease-in-out infinite; }
+  @keyframes lili-flutter{ 0%,100%{ transform: translateY(0) rotate(-3deg);} 50%{ transform: translateY(-10px) rotate(3deg);} }
+
+  /* ---------- Missão: escolha de flor ---------- */
+  .choice-row{ display:flex; justify-content:center; gap:14px; margin: 14px 0; flex-wrap:wrap; }
+  .choice-item{
+    background:#fff; border-radius:20px; padding:16px 18px; cursor:pointer; box-shadow: 0 4px 10px rgba(74,59,120,0.12);
+    font-size:2.2rem; border:3px solid transparent; transition: transform 0.12s ease;
+  }
+  .choice-item.wrong{ animation: shake 0.4s ease; }
+  .choice-item.right{ border-color: var(--folha); background:#EAFBF1; }
+  @keyframes shake{ 0%,100%{ transform: translateX(0);} 25%{ transform: translateX(-6px);} 75%{ transform: translateX(6px);} }
+  #choice-status{ margin-top:10px; font-weight:800; color: var(--folha); min-height:1.4em; }
+
+  /* ---------- Descoberta: 3 objetos ---------- */
+  .discover-row{ display:flex; justify-content:center; gap:16px; font-size:2.8rem; margin:14px 0; }
+  .letter-reveal{ display:flex; justify-content:center; gap:14px; margin-top:10px; opacity:0.9; }
+  .letter-reveal span{ font-size:1.8rem; font-weight:800; color:var(--coral); background:#fff; border-radius:12px; padding:4px 14px; box-shadow:0 3px 6px rgba(74,59,120,0.12); }
+
+  /* ---------- Mini história ---------- */
+  #story-emoji{ font-size:4rem; margin-bottom:6px; }
+  .story-dots{ display:flex; justify-content:center; gap:6px; margin-top:10px; }
+  .story-dot{ width:8px; height:8px; border-radius:50%; background:#ddd; }
+  .story-dot.active{ background: var(--coral); }
+
+  /* ---------- Bolhas coloridas ---------- */
+  .bubble-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; margin: 14px 0; }
+  .bubble{
+    background: radial-gradient(circle at 35% 30%, #ffffff, #E4F3FF 60%, #C9ECFB);
+    border-radius:50%; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center;
+    font-size:1.6rem; cursor:pointer; box-shadow: 0 4px 10px rgba(74,59,120,0.15); transition: transform 0.15s ease, opacity 0.3s ease;
+  }
+  .bubble.popped{ opacity:0; transform: scale(1.5); pointer-events:none; }
+  #bubble-status{ margin-top:6px; font-weight:700; color: var(--ameixa); font-size:0.9rem; }
+
+  /* ---------- Diploma / medalha ---------- */
+  .diploma{ border: 6px solid var(--sol); border-radius: 24px; padding: 20px; background: #fffdf5; }
+  .stars-row{ font-size:1.6rem; letter-spacing:4px; }
+
+  /* ---------- Peça de mapa ---------- */
+  .map-piece{ font-size:4.5rem; animation: map-wiggle 1.8s ease-in-out infinite; }
+  @keyframes map-wiggle{ 0%,100%{ transform: rotate(-4deg);} 50%{ transform: rotate(4deg);} }
+
+  /* ---------- Céu noturno (oração) ---------- */
+  .night-sky{ background: radial-gradient(ellipse at top, #2b2560, #140f33); border-radius: 32px; padding: 24px 20px; color:#fff; position:relative; overflow:hidden; }
+  .star{ position:absolute; background:#fff; border-radius:50%; animation: twinkle 2.2s ease-in-out infinite; }
+  .moon{ font-size:3.4rem; }
+  .night-sky p.speech{ color:#EFE9FF; }
+  .night-sky .papai-card{ background: rgba(255,255,255,0.12); border-color:#EFE9FF; color:#EFE9FF; }
+  .night-sky .papai-card .tag{ background:#EFE9FF; color:var(--ameixa); }
+
+  /* ---------- Navegação inferior ---------- */
+  #nav{ position:relative; z-index:5; display:flex; justify-content:space-between; align-items:center; padding: 8px 20px 16px; }
+  .nav-btn{ font-family:inherit; border:none; cursor:pointer; font-weight:700; font-size:0.95rem; padding: 10px 18px; border-radius:18px; background: rgba(255,255,255,0.85); color: var(--ameixa); box-shadow: 0 3px 6px rgba(0,0,0,0.12); }
+  .nav-btn:disabled{ opacity:0.35; }
+  .nav-spacer{ flex:1; }
+
+  /* ---------- Efeitos ---------- */
+  .fx-layer{ position:fixed; inset:0; pointer-events:none; z-index:50; overflow:hidden; }
+  .confetti{ position:absolute; top:-20px; border-radius:2px; opacity:0.95; animation: confetti-fall linear forwards; }
+  @keyframes confetti-fall{ to{ transform: translateY(110vh) rotate(540deg); opacity:0.9; } }
+  .sparkle{ position:absolute; font-size: 1.6rem; animation: sparkle-pop 0.9s ease forwards; }
+  @keyframes sparkle-pop{ 0%{ transform: scale(0) translateY(0); opacity:1;} 60%{ transform: scale(1.3) translateY(-30px); opacity:1;} 100%{ transform: scale(0.9) translateY(-60px); opacity:0;} }
+  .heart-float{ position:absolute; bottom:-30px; font-size:1.8rem; animation: heart-rise linear forwards; }
+  @keyframes heart-rise{ to{ transform: translateY(-120vh) translateX(var(--drift, 0px)) rotate(20deg); opacity:0; } }
+  .leaf-float{ position:absolute; top:-30px; font-size:1.7rem; animation: leaf-fall linear forwards; }
+  @keyframes leaf-fall{ to{ transform: translateY(120vh) translateX(var(--drift, 0px)) rotate(360deg); opacity:0.9; } }
+  .fly-emoji{ position:absolute; font-size: 1.8rem; animation: fly-across-fx ease-in-out forwards; }
+  @keyframes fly-across-fx{ 0%{ transform: translate(-10vw,0) scale(0.8); opacity:0;} 15%{ opacity:1;} 100%{ transform: translate(110vw,-40px) scale(1.1); opacity:0;} }
+  .rainbow-arc{ position:absolute; left:50%; top:40%; width:220px; height:110px; margin-left:-110px; border-radius:110px 110px 0 0;
+    border:10px solid transparent; border-top-color:#FF7A5C; border-right-color:#FFCE45; border-left-color:#8ED8F8;
+    animation: rainbow-in 1.2s ease forwards, rainbow-out 0.8s ease 1.6s forwards; opacity:0; }
+  @keyframes rainbow-in{ from{ opacity:0; transform: scale(0.6);} to{ opacity:0.9; transform: scale(1);} }
+  @keyframes rainbow-out{ to{ opacity:0; } }
+  .medal-pop{ position:absolute; left:50%; top:35%; transform: translate(-50%,-50%) scale(0); font-size:5rem;
+    animation: medal-in 1s cubic-bezier(.26,1.6,.5,1) forwards; }
+  @keyframes medal-in{ 0%{ transform: translate(-50%,-50%) scale(0) rotate(-30deg); opacity:0;} 70%{ transform: translate(-50%,-50%) scale(1.2) rotate(8deg); opacity:1;} 100%{ transform: translate(-50%,-50%) scale(1) rotate(0deg); opacity:1;} }
+  .firework{ position:absolute; width:8px; height:8px; border-radius:50%; animation: firework-burst 0.9s ease forwards; }
+  @keyframes firework-burst{ to{ transform: translate(var(--fx,0), var(--fy,0)) scale(0.3); opacity:0; } }
+
+  @media (max-width:360px){
+    h1.title-plaque{ font-size:1.25rem; }
+    .bubble-grid{ grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div id="sky" class="sem-cor">
+    <div class="sun"></div>
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="hill back"></div>
+    <div class="hill"></div>
+    <div class="flower-bg" style="left:10%;">🌸</div>
+    <div class="flower-bg" style="left:28%; animation-delay:-1s;">🌼</div>
+    <div class="flower-bg" style="left:50%; animation-delay:-2s;">🌷</div>
+    <div class="flower-bg" style="left:70%; animation-delay:-0.5s;">🌹</div>
+    <div class="flower-bg" style="left:86%; animation-delay:-1.5s;">🌻</div>
+  </div>
+
+  <button id="info-btn" title="Instruções para o papai">ℹ️</button>
+
+  <div id="progress-wrap">
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="stage">
+    <div class="card" id="card"></div>
+  </div>
+
+  <div id="nav">
+    <button class="nav-btn" id="btn-back">◀ Voltar</button>
+    <div class="nav-spacer"></div>
+    <button class="nav-btn" id="btn-next">Próximo ▶</button>
+  </div>
+</div>
+
+<div class="fx-layer" id="fx-layer"></div>
+
+<div id="info-modal">
+  <div class="box">
+    <h3>🎙️ Como usar sua voz neste episódio</h3>
+    <p>Este roteiro funciona sem nenhum áudio — mas fica ainda mais especial com a sua voz. Grave frases curtas (3 a 8 segundos cada) e salve-as em uma pasta chamada <code>audio</code>, ao lado deste arquivo HTML, com estes nomes:</p>
+    <p>
+      <code>audio01.mp3</code> — "Oi, Ester! Que bom te ver!"<br>
+      <code>audio02.mp3</code> — "Vamos abrir a carta e ajudar a Lili?"<br>
+      <code>audio03.mp3</code> — "Uauu, você conseguiu!"<br>
+      <code>audio04.mp3</code> — "As cores voltaram! Que descoberta incrível!"<br>
+      <code>audio05.mp3</code> — "Vamos ouvir uma historinha da Lili?"<br>
+      <code>audio06.mp3</code> — "Parabéns, Ester!"<br>
+      <code>audio07.mp3</code> — "O papai ama passar esse tempo com você."<br>
+      <code>audio08.mp3</code> — "Até a nossa próxima aventura!"
+    </p>
+    <p>Se algum arquivo não existir, o app continua funcionando normalmente — só não toca aquele trecho. Os efeitinhos de estrelas, confetes, arco-íris e medalhas são sintetizados no próprio código, sem precisar de nenhum arquivo.</p>
+    <p>Lembre-se: quem toca em "Próximo" e "Voltar" é <strong>você</strong>. A Ester participa de voz e de coração — o app é só o seu roteiro de apoio.</p>
+    <button class="btn secondary" onclick="document.getElementById('info-modal').classList.remove('open')">Entendi!</button>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   SOM: efeitos sintetizados (sem arquivos) + voz do papai (arquivos opcionais)
+   ============================================================ */
+let audioCtx = null;
+function chime(freqs=[880,1320]){
+  try{
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    const now = audioCtx.currentTime;
+    freqs.forEach((f,i)=>{
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = f;
+      gain.gain.setValueAtTime(0.0001, now + i*0.09);
+      gain.gain.linearRampToValueAtTime(0.12, now + i*0.09 + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + i*0.09 + 0.25);
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start(now + i*0.09);
+      osc.stop(now + i*0.09 + 0.3);
+    });
+  }catch(e){ /* som indisponível, tudo bem, a experiência continua */ }
+}
+function playVoice(fileBase){
+  try{
+    const a = new Audio('audio/'+fileBase+'.mp3');
+    a.play().catch(()=>{ /* arquivo ausente: segue normalmente */ });
+  }catch(e){ /* navegador sem suporte: segue normalmente */ }
+}
+
+/* ============================================================
+   LILI, a borboleta — elemento visual assinatura do episódio
+   ============================================================ */
+const LILI_SVG = `
+<svg viewBox="0 0 64 64">
+  <ellipse cx="32" cy="32" rx="4" ry="14" fill="#4A3B78"/>
+  <circle cx="32" cy="16" r="5" fill="#4A3B78"/>
+  <line x1="30" y1="12" x2="26" y2="6" stroke="#4A3B78" stroke-width="1.6" stroke-linecap="round"/>
+  <line x1="34" y1="12" x2="38" y2="6" stroke="#4A3B78" stroke-width="1.6" stroke-linecap="round"/>
+  <ellipse cx="18" cy="24" rx="14" ry="10" fill="#FF9EC4"/>
+  <ellipse cx="46" cy="24" rx="14" ry="10" fill="#9B7BE0"/>
+  <ellipse cx="20" cy="40" rx="11" ry="8" fill="#FFCE45"/>
+  <ellipse cx="44" cy="40" rx="11" ry="8" fill="#4FB477"/>
+  <circle cx="18" cy="24" r="4" fill="#fff" opacity="0.6"/>
+  <circle cx="46" cy="24" r="4" fill="#fff" opacity="0.6"/>
+</svg>`;
+
+function papaiCard(fala, direcao){
+  return `<div class="papai-card">
+      <span class="tag">📋 PARA O PAPAI</span><br>
+      ${fala ? `Diga com carinho: <q>${fala}</q>` : ''}
+      ${direcao ? `<div style="margin-top:6px;">${direcao}</div>` : ''}
+    </div>`;
+}
+
+/* ============================================================
+   ESTADO
+   ============================================================ */
+const state = {
+  scene: 0,
+  gardenColored: false,
+  flowerRightFound: false,
+  storyIndex: 0,
+  askedIndex: 0,
+  bubblesPopped: 0,
+  prayerOpen: false
+};
+
+const cardEl = document.getElementById('card');
+const fillEl = document.getElementById('progress-fill');
+const backBtn = document.getElementById('btn-back');
+const nextBtn = document.getElementById('btn-next');
+const fxLayer = document.getElementById('fx-layer');
+const skyEl = document.getElementById('sky');
+const TOTAL_SCENES = 14; // índices 0 a 14
+
+document.getElementById('info-btn').onclick = ()=> document.getElementById('info-modal').classList.add('open');
+
+/* ============================================================
+   EFEITOS VISUAIS — vários tipos, para nunca repetir a mesma recompensa
+   ============================================================ */
+function confetti(count=40){
+  const colors = ['#FF7A5C','#FFCE45','#4FB477','#8ED8F8','#FF9EC4','#9B7BE0'];
+  for(let i=0;i<count;i++){
+    const el = document.createElement('div');
+    el.className='confetti';
+    const size = 6 + Math.random()*6;
+    el.style.width = size+'px';
+    el.style.height = (size*0.4)+'px';
+    el.style.left = (Math.random()*100)+'vw';
+    el.style.background = colors[Math.floor(Math.random()*colors.length)];
+    const duration = 2.2 + Math.random()*1.6;
+    el.style.animationDuration = duration+'s';
+    el.style.animationDelay = (Math.random()*0.4)+'s';
+    fxLayer.appendChild(el);
+    setTimeout(()=>el.remove(), (duration+0.5)*1000);
+  }
+  chime([660,990]);
+}
+function sparkles(count=14){
+  const icons = ['⭐','✨','🌟'];
+  for(let i=0;i<count;i++){
+    const el = document.createElement('div');
+    el.className='sparkle';
+    el.textContent = icons[Math.floor(Math.random()*icons.length)];
+    el.style.left = (20+Math.random()*60)+'vw';
+    el.style.top = (30+Math.random()*40)+'vh';
+    el.style.animationDelay = (Math.random()*0.3)+'s';
+    fxLayer.appendChild(el);
+    setTimeout(()=>el.remove(), 1200);
+  }
+  chime([880,1320]);
+}
+function hearts(count=24){
+  for(let i=0;i<count;i++){
+    const el = document.createElement('div');
+    el.className='heart-float';
+    el.textContent='❤️';
+    el.style.left = (Math.random()*100)+'vw';
+    el.style.setProperty('--drift', (Math.random()*80-40)+'px');
+    const duration = 3+Math.random()*2;
+    el.style.animationDuration = duration+'s';
+    el.style.animationDelay = (Math.random()*0.6)+'s';
+    fxLayer.appendChild(el);
+    setTimeout(()=>el.remove(), (duration+0.8)*1000);
+  }
+  chime([523,784,1046]);
+}
+function leaves(count=18){
+  const icons=['🍃','🍂','🌿'];
+  for(let i=0;i<count;i++){
+    const el = document.createElement('div');
+    el.className='leaf-float';
+    el.textContent = icons[Math.floor(Math.random()*icons.length)];
+    el.style.left = (Math.random()*100)+'vw';
+    el.style.setProperty('--drift', (Math.random()*100-50)+'px');
+    const duration = 3+Math.random()*2;
+    el.style.animationDuration = duration+'s';
+    el.style.animationDelay = (Math.random()*0.5)+'s';
+    fxLayer.appendChild(el);
+    setTimeout(()=>el.remove(), (duration+0.6)*1000);
+  }
+  chime([392,523]);
+}
+function flowers(count=16){
+  const icons=['🌸','🌼','🌷','🌻'];
+  for(let i=0;i<count;i++){
+    const el = document.createElement('div');
+    el.className='sparkle';
+    el.textContent = icons[Math.floor(Math.random()*icons.length)];
+    el.style.left = (10+Math.random()*80)+'vw';
+    el.style.top = (25+Math.random()*45)+'vh';
+    el.style.animationDelay = (Math.random()*0.3)+'s';
+    fxLayer.appendChild(el);
+    setTimeout(()=>el.remove(), 1200);
+  }
+  chime([659,880,1109]);
+}
+function butterflies(count=6){
+  for(let i=0;i<count;i++){
+    const el = document.createElement('div');
+    el.className='fly-emoji';
+    el.textContent='🦋';
+    el.style.top = (15+Math.random()*55)+'vh';
+    const duration = 2.6+Math.random()*1.4;
+    el.style.animationDuration = duration+'s';
+    el.style.animationDelay = (Math.random()*0.8)+'s';
+    fxLayer.appendChild(el);
+    setTimeout(()=>el.remove(), (duration+1)*1000);
+  }
+  chime([784,988,1318]);
+}
+function rainbow(){
+  const el = document.createElement('div');
+  el.className='rainbow-arc';
+  fxLayer.appendChild(el);
+  setTimeout(()=>el.remove(), 2500);
+  chime([523,659,784,1046]);
+}
+function medal(){
+  const el = document.createElement('div');
+  el.className='medal-pop';
+  el.textContent='🏅';
+  fxLayer.appendChild(el);
+  setTimeout(()=>el.remove(), 1600);
+  chime([659,880,1318]);
+}
+function fireworksSoft(count=3){
+  const colors=['#FF7A5C','#FFCE45','#8ED8F8','#9B7BE0','#4FB477'];
+  for(let b=0; b<count; b++){
+    const cx = 20+Math.random()*60, cy = 20+Math.random()*40;
+    for(let i=0;i<10;i++){
+      const el = document.createElement('div');
+      el.className='firework';
+      const angle = (i/10)*Math.PI*2;
+      el.style.left = cx+'vw'; el.style.top = cy+'vh';
+      el.style.background = colors[Math.floor(Math.random()*colors.length)];
+      el.style.setProperty('--fx', (Math.cos(angle)*60)+'px');
+      el.style.setProperty('--fy', (Math.sin(angle)*60)+'px');
+      el.style.animationDelay = (b*0.25)+'s';
+      fxLayer.appendChild(el);
+      setTimeout(()=>el.remove(), (b*0.25+1)*1000);
+    }
+  }
+  chime([784,1046]);
+}
+
+const REWARD_POOL = [confetti, sparkles, hearts, leaves, flowers, butterflies, rainbow, fireworksSoft];
+let lastReward = -1;
+function randomReward(){
+  let idx;
+  do{ idx = Math.floor(Math.random()*REWARD_POOL.length); }while(idx===lastReward);
+  lastReward = idx;
+  REWARD_POOL[idx]();
+}
+
+/* ============================================================
+   CONTEÚDO
+   ============================================================ */
+const STORY = [
+  {emoji:'🦋🌳', text:'Lili passeava pelo jardim, mesmo sem cor.'},
+  {emoji:'🌳✨', text:'Ela encontrou uma árvore bem grande e forte.'},
+  {emoji:'🐝🌼', text:'Depois viu uma abelha zunindo perto das flores.'},
+  {emoji:'🍍', text:'E no fim do caminho, um abacaxi enorme apareceu.'},
+  {emoji:'🦋💛', text:'Lili sorriu, porque sabia que a Ester ia adorar essa descoberta.'}
+];
+const QUESTIONS = [
+  'Qual foi seu momento favorito até agora?',
+  'Você gosta de flores?',
+  'Qual cor você mais gosta?',
+  'Você ajudaria outra borboleta que precisasse?'
+];
+const BUBBLE_ICONS = ['🌸','⭐','❤️','🦋','🌼','✨','🌷','🍃','🌻','💛','🦋','⭐'];
+
+/* ============================================================
+   RENDERIZAÇÃO DAS CENAS
+   ============================================================ */
+function renderScene(){
+  const s = state.scene;
+  backBtn.style.visibility = (s===0) ? 'hidden' : 'visible';
+  nextBtn.style.visibility = 'visible';
+  nextBtn.disabled = false;
+  fillEl.style.width = (s/TOTAL_SCENES*100)+'%';
+  skyEl.classList.toggle('sem-cor', !state.gardenColored);
+
+  let html = '';
+
+  if(s===0){
+    nextBtn.style.visibility = 'hidden';
+    html = `
+      <div class="envelope-scene">
+        <div class="star" style="width:2px;height:2px;top:12%;left:16%;"></div>
+        <div class="star" style="width:2px;height:2px;top:20%;left:76%;animation-delay:-1s;"></div>
+        <div class="star" style="width:3px;height:3px;top:8%;left:50%;animation-delay:-0.6s;"></div>
+        <div class="envelope">📜</div>
+        <p class="speech">"Olá, Ester!<br>A borboleta Lili perdeu as cores do jardim.<br>Será que você pode ajudar?"</p>
+        ${papaiCard('Oi, Ester! Chegou uma carta muito especial para nós hoje.')}
+        <div class="btn-row">
+          <button class="btn huge" id="start-btn">🌸 Vamos ajudar!</button>
+        </div>
+      </div>`;
+  }
+  else if(s===1){
+    html = `
+      <h1 class="title-plaque">As Aventuras da Ester</h1>
+      <div class="episode-tag">Episódio 2 · Método Papai Presente</div>
+      <div class="episode-name">O Jardim das Cores Perdidas</div>
+      <div class="lili-wrap">${LILI_SVG}</div>
+      <p class="speech">"Obrigada por vir, Ester!"</p>
+      ${papaiCard(null, 'Converse um pouco com a Ester. Pergunte se ela já viu uma borboleta de verdade.')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  else if(s===2){
+    html = `
+      <div class="big-emoji">🥀🌫️</div>
+      <p class="speech">"As cores desapareceram do jardim..."</p>
+      ${papaiCard(null, 'Mostre tristeza gentil na voz da Lili, sem assustar — é só o início da aventura.')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  else if(s===3){
+    html = `
+      <p class="speech">Vamos encontrar a flor vermelha!</p>
+      <div class="choice-row">
+        <div class="choice-item" data-flor="rosa">🌹</div>
+        <div class="choice-item" data-flor="margarida">🌼</div>
+        <div class="choice-item" data-flor="girassol">🌻</div>
+      </div>
+      <div id="choice-status">${state.flowerRightFound ? 'Vocês encontraram! ⭐' : ''}</div>
+      ${papaiCard(null, 'Pergunte: qual dessas é vermelha? Toque na figura que a Ester escolher em voz alta.')}`;
+  }
+  else if(s===4){
+    html = `
+      <div class="big-emoji">🐞</div>
+      <p class="speech">A joaninha perdeu sua casa. Qual caminho devemos seguir?</p>
+      <div class="choice-row">
+        <div class="choice-item" data-path="arvore">🌳</div>
+        <div class="choice-item" data-path="flor">🌸</div>
+      </div>
+      ${papaiCard(null, 'Pergunte à Ester qual caminho seguir. Os dois levam a um final feliz — o importante é ela sentir que escolheu.')}`;
+  }
+  else if(s===5){
+    html = `
+      <div class="big-emoji">🐞🏠</div>
+      <p class="speech">A joaninha encontrou sua casinha! Todo mundo comemorou.</p>
+      ${papaiCard('Uauu, você conseguiu!')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  else if(s===6){
+    html = `
+      <div class="discover-row">🍍 ✈️ 🌳</div>
+      <p class="speech">O que essas figuras têm em comum?</p>
+      ${papaiCard(null, 'Deixe a Ester responder livremente. Depois diga: "Todas elas têm uma palavrinha que começa com A."')}
+      <div class="letter-reveal"><span>A</span><span>a</span></div>
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  else if(s===7){
+    if(state.storyIndex >= STORY.length) state.storyIndex = 0;
+    html = `
+      <div id="story-emoji">${STORY[state.storyIndex].emoji}</div>
+      <p class="speech" id="story-text">${STORY[state.storyIndex].text}</p>
+      <div class="story-dots">${STORY.map((_,i)=>`<span class="story-dot ${i===state.storyIndex?'active':''}"></span>`).join('')}</div>
+      ${papaiCard(null, 'Leia devagar, com carinho — a historinha é curta de propósito.')}
+      <div class="btn-row"><button class="btn secondary" id="story-next">Continuar a história ➜</button></div>`;
+  }
+  else if(s===8){
+    html = `
+      <p class="speech">Estoure as bolhas que quiser!</p>
+      <div class="bubble-grid">${BUBBLE_ICONS.map((ic,i)=>`<div class="bubble" data-idx="${i}">${ic}</div>`).join('')}</div>
+      <div id="bubble-status">Nenhum erro aqui — toda bolha é uma surpresa diferente!</div>
+      ${papaiCard(null, 'Deixe a Ester escolher quais bolhas estourar. Cada uma tem uma surpresa diferente.')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  else if(s===9){
+    html = `
+      <p class="speech" style="font-size:1.4rem;">${QUESTIONS[state.askedIndex]}</p>
+      ${papaiCard(null, 'Leia a pergunta em voz alta. Espere bastante e valorize qualquer resposta.')}
+      <div class="btn-row"><button class="btn secondary" id="ask-next">Próxima pergunta ➜</button></div>`;
+  }
+  else if(s===10){
+    html = `
+      <div class="big-emoji">${state.gardenColored ? '🌈🌸🦋' : '🌫️'}</div>
+      <p class="speech">${state.gardenColored ? 'As cores voltaram ao jardim!' : 'Será que as cores vão voltar?'}</p>
+      ${papaiCard(state.gardenColored ? null : 'Toque no botão com a Ester e comemore juntos quando as cores aparecerem!', state.gardenColored ? 'A Lili está muito feliz e agradecida!' : null)}
+      <div class="btn-row">
+        <button class="btn huge" id="color-btn" ${state.gardenColored?'disabled':''}>${state.gardenColored ? 'Que lindo! 🌈' : '✨ Trazer as cores de volta'}</button>
+      </div>`;
+  }
+  else if(s===11){
+    html = `
+      <div class="map-piece">🧩</div>
+      <p class="speech">"Guarde bem essa peça.<br>Ela fará parte de um grande segredo."</p>
+      ${papaiCard(null, 'Fale com um tom de mistério gostoso — não explique mais nada. Isso cria curiosidade para a próxima aventura.')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  else if(s===12){
+    html = `
+      <div class="diploma">
+        <div class="stars-row">🌟🌟🌟🌟🌟</div>
+        <h1 class="title-plaque" style="border-style:solid;">Parabéns Ester!</h1>
+        <p class="speech">Você trouxe as cores de volta ao jardim!<br>Você agora é uma<br><strong>Exploradora do Jardim</strong> 🌈</p>
+      </div>
+      ${papaiCard('Parabéns, Ester!')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  else if(s===13){
+    html = `
+      <div class="night-sky">
+        <div class="star" style="width:3px;height:3px;top:14%;left:20%;"></div>
+        <div class="star" style="width:2px;height:2px;top:24%;left:70%;animation-delay:-1s;"></div>
+        <div class="star" style="width:3px;height:3px;top:40%;left:40%;animation-delay:-0.5s;"></div>
+        <div class="star" style="width:2px;height:2px;top:10%;left:55%;animation-delay:-1.4s;"></div>
+        <div class="star" style="width:2px;height:2px;top:34%;left:10%;animation-delay:-0.8s;"></div>
+        <div class="moon">🌙</div>
+        ${papaiCard(null, 'Ore espontaneamente com a Ester. Se preferir um ponto de partida, toque abaixo.')}
+        <div class="btn-row"><button class="btn secondary" id="prayer-toggle">🙏 ${state.prayerOpen?'Esconder':'Ver'} oração sugerida</button></div>
+        ${state.prayerOpen ? `<p class="speech">Jesus,<br>obrigado por este dia.<br>Obrigado porque cuidamos do jardim juntos.<br>Cuida da Ester, do papai, da mamãe<br>e de toda nossa família.<br><strong>Amém.</strong></p>` : ''}
+      </div>`;
+  }
+  else if(s===14){
+    nextBtn.style.visibility = 'hidden';
+    html = `
+      <div class="lili-wrap">${LILI_SVG}</div>
+      <p class="speech">"Até nossa próxima aventura!"</p>
+      <div class="big-emoji">❤️</div>
+      ${papaiCard('O papai ama passar esse tempo com você.')}
+      <div class="btn-row">
+        <button class="btn huge" id="hug-btn">❤️ Abraço do Papai</button>
+      </div>
+      <div class="btn-row">
+        <button class="nav-btn" id="restart-btn">Reviver a aventura 🔁</button>
+      </div>`;
+  }
+
+  cardEl.innerHTML = html;
+  attachSceneEvents();
+}
+
+/* ============================================================
+   EVENTOS ESPECÍFICOS DE CADA CENA
+   ============================================================ */
+function attachSceneEvents(){
+  const s = state.scene;
+
+  if(s===0){
+    playVoice('audio01');
+    document.getElementById('start-btn').onclick = ()=>{ playVoice('audio02'); goTo(1); };
+  }
+  if(s===1 || s===2 || s===6 || s===11 || s===12){
+    const btn = document.getElementById('continue-btn');
+    if(btn) btn.onclick = ()=> goTo(state.scene+1);
+  }
+  if(s===3){
+    document.querySelectorAll('.choice-item').forEach(item=>{
+      item.onclick = ()=>{
+        if(item.dataset.flor === 'rosa'){
+          item.classList.add('right');
+          state.flowerRightFound = true;
+          confetti(30);
+          sparkles(10);
+          playVoice('audio03');
+          document.getElementById('choice-status').textContent = 'Vocês encontraram! ⭐';
+        } else {
+          item.classList.add('wrong');
+          document.getElementById('choice-status').textContent = 'Quase lá! Vamos procurar a flor vermelha.';
+          setTimeout(()=>item.classList.remove('wrong'), 400);
+        }
+      };
+    });
+  }
+  if(s===4){
+    document.querySelectorAll('.choice-item').forEach(item=>{
+      item.onclick = ()=>{
+        sparkles(10);
+        goTo(5);
+      };
+    });
+  }
+  if(s===5){
+    fireworksSoft(2);
+    const btn = document.getElementById('continue-btn');
+    if(btn) btn.onclick = ()=> goTo(state.scene+1);
+  }
+  if(s===7){
+    if(state.storyIndex===0) playVoice('audio05');
+    document.getElementById('story-next').onclick = ()=>{
+      state.storyIndex = (state.storyIndex+1) % STORY.length;
+      renderScene();
+    };
+  }
+  if(s===8){
+    document.querySelectorAll('.bubble').forEach(b=>{
+      b.onclick = ()=>{
+        if(b.classList.contains('popped')) return;
+        b.classList.add('popped');
+        state.bubblesPopped++;
+        randomReward();
+      };
+    });
+    const btn = document.getElementById('continue-btn');
+    if(btn) btn.onclick = ()=> goTo(state.scene+1);
+  }
+  if(s===9){
+    document.getElementById('ask-next').onclick = ()=>{
+      state.askedIndex = (state.askedIndex+1) % QUESTIONS.length;
+      renderScene();
+    };
+  }
+  if(s===10){
+    const btn = document.getElementById('color-btn');
+    if(btn) btn.onclick = ()=>{
+      state.gardenColored = true;
+      rainbow();
+      flowers(14);
+      playVoice('audio04');
+      renderScene();
+    };
+  }
+  if(s===12){ medal(); }
+  if(s===13){
+    document.getElementById('prayer-toggle').onclick = ()=>{
+      state.prayerOpen = !state.prayerOpen;
+      renderScene();
+    };
+  }
+  if(s===14){
+    document.getElementById('hug-btn').onclick = ()=>{
+      hearts(30);
+      butterflies(8);
+      playVoice('audio07');
+      setTimeout(()=>playVoice('audio08'), 1600);
+      const closing = `<div class="papai-card"><span class="tag">📋 PARA O PAPAI</span><br>Diga com carinho: <q>Até a nossa próxima aventura!</q></div>`;
+      cardEl.querySelector('.big-emoji').insertAdjacentHTML('afterend', closing);
+    };
+    document.getElementById('restart-btn').onclick = ()=>{
+      state.gardenColored = false;
+      state.flowerRightFound = false;
+      state.storyIndex = 0;
+      state.askedIndex = 0;
+      state.bubblesPopped = 0;
+      state.prayerOpen = false;
+      goTo(0);
+    };
+  }
+}
+
+/* ============================================================
+   NAVEGAÇÃO
+   ============================================================ */
+function goTo(idx){
+  state.scene = Math.max(0, Math.min(TOTAL_SCENES, idx));
+  renderScene();
+}
+backBtn.onclick = ()=> goTo(state.scene-1);
+nextBtn.onclick = ()=> goTo(state.scene+1);
+
+renderScene();
+</script>
+</body>
+</html>
