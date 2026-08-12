@@ -66,7 +66,11 @@ Pode aparecer discretamente em praticamente todos os episódios.
 
 Não é apenas uma árvore — é um personagem. Muito antigo. Guardião das histórias. Conhece todos os caminhos. Suas folhas mudam conforme as estações das aventuras. É também a casa de Aurora.
 
-*Ainda não estreou em nenhum episódio.*
+**Poses recebidas:** acordado-sorrindo, falando, apontando ✅
+
+⚠️ **Nota de estilo (pendente de decisão):** o traço do Carvalho é mais pintado/detalhado do que o 2D flat do resto do elenco. Aceito como característica própria da árvore ancestral, ou a decidir se deve ser achatado pra bater com o padrão dos outros.
+
+*Ainda não estreou em nenhum episódio — previsto para o Episódio 7.*
 
 ### 🐿️ Pipo — O Esquilo Inventor
 
@@ -79,6 +83,14 @@ Muito inteligente, muito agitado. Está sempre construindo alguma invenção e q
 **Assets aprovados:** `assets/characters/pipo/pipo-oficial-v1.0.webp` ✅ (master em PNG salvo em `PRODUCAO/02-personagens/pipo/`)
 
 **Poses recebidas:** oficial, correndo, pensando, apontando, comemorando ✅
+
+### 🐘 Tito — O Elefantinho
+
+*Espécie e papel narrativo ainda não descritos na Bíblia — pendente de definição junto com o Severo.*
+
+**Poses recebidas:** oficial, caminhando, curioso, pensando, surpreso, comemorando ✅
+
+⚠️ **Nota de estilo (BLOQUEANTE, decisão pendente):** as imagens do Tito são renderização 3D realista (estilo CGI), incompatível com o padrão "desenho infantil 2D premium" do resto do elenco. Organizado na biblioteca por enquanto, mas **não recomendado para uso em episódio** até a decisão ser tomada (regenerar em 2D flat, ou aceitar como exceção proposital).
 
 ## Filosofia do Universo
 
