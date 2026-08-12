@@ -70,7 +70,9 @@ Não é apenas uma árvore — é um personagem. Muito antigo. Guardião das his
 
 ⚠️ **Nota de estilo (pendente de decisão):** o traço do Carvalho é mais pintado/detalhado do que o 2D flat do resto do elenco. Aceito como característica própria da árvore ancestral, ou a decidir se deve ser achatado pra bater com o padrão dos outros.
 
-*Ainda não estreou em nenhum episódio — previsto para o Episódio 7.*
+**Representa:** memória, conhecimento, paciência, natureza, continuidade.
+
+*Estreou no Episódio 7 — "O Guardião das Histórias".*
 
 ### 🐿️ Pipo — O Esquilo Inventor
 
@@ -86,11 +88,33 @@ Muito inteligente, muito agitado. Está sempre construindo alguma invenção e q
 
 ### 🐘 Tito — O Elefantinho
 
-*Espécie e papel narrativo ainda não descritos na Bíblia — pendente de definição junto com o Severo.*
+**Espécie:** pequeno elefante cinza.
+
+**Personalidade:** curioso, gentil, inteligente, observador, ligeiramente desajeitado.
+
+**Função narrativa:** descobrir, observar, perguntar e aprender junto com Ester. Tito não deve saber tudo nem resolver os problemas sozinho.
+
+*Estreou no Episódio 7 — "O Guardião das Histórias".*
 
 **Poses recebidas:** oficial, caminhando, curioso, pensando, surpreso, comemorando ✅
 
-⚠️ **Nota de estilo (BLOQUEANTE, decisão pendente):** as imagens do Tito são renderização 3D realista (estilo CGI), incompatível com o padrão "desenho infantil 2D premium" do resto do elenco. Organizado na biblioteca por enquanto, mas **não recomendado para uso em episódio** até a decisão ser tomada (regenerar em 2D flat, ou aceitar como exceção proposital).
+⚠️ **Nota de estilo (BLOQUEANTE, decisão em andamento):** as imagens do Tito são renderização 3D realista (estilo CGI), incompatível com o padrão "desenho infantil 2D premium" do resto do elenco. **Decisão tomada em 12/08: regenerar em 2D flat** (mesma decisão da Sofia). Prompt já entregue ao Severo — aguardando as imagens novas.
+
+### 🐰 Sofia — A Coelhinha
+
+**Espécie:** pequena coelhinha branca.
+
+**Personalidade:** gentil, curiosa, delicada, inicialmente um pouco tímida. Personalidade a se aprofundar conforme os episódios avançarem.
+
+**Função inicial:** personagem de descoberta e amizade.
+
+*Estreou no Episódio 8 — "O Segredo da Coelhinha Sofia".*
+
+**Representa:** honestidade, responsabilidade, coragem de reconhecer um erro.
+
+**Poses recebidas:** oficial, curiosa, tímida, feliz, entregando-semente ✅
+
+⚠️ **Nota de estilo (BLOQUEANTE, decisão em andamento):** mesmo caso do Tito — imagens em renderização 3D realista (CGI), incompatível com o padrão 2D flat do resto do elenco. **Decisão tomada em 12/08: regenerar em 2D flat.** Prompts já entregues ao Severo (Sofia e Tito) — episódio 8 foi produzido com a arte 3D provisória enquanto a versão 2D não chega; troca de arquivo planejada assim que as novas imagens chegarem (mesmos nomes de arquivo, sem necessidade de editar o HTML do episódio).
 
 ## Filosofia do Universo
 
@@ -102,9 +126,23 @@ Cada episódio deve trabalhar, de forma natural e integrada à narrativa, pelo m
 
 Esses valores jamais devem ser apresentados como uma lição explícita — devem surgir das escolhas, diálogos e experiências vividas pelos personagens.
 
+**Já trabalhados em episódio (evitar repetir a mesma lição sem evolução):** amizade (Ep.2, 5, 6) · cooperação (Ep.5, 6) · paciência e escuta (Ep.7) · cuidado com a natureza (Ep.7) · honestidade, responsabilidade e coragem de dizer a verdade (Ep.8).
+
 ## Princípio Pedagógico
 
 As Aventuras de Ester® não têm como objetivo ensinar por meio de explicações. O aprendizado acontece pela experiência: a criança participa, descobre, experimenta, brinca, reflete, conversa com o adulto. A narrativa é apenas o caminho para fortalecer vínculos e estimular o desenvolvimento cognitivo, emocional e social.
+
+## Regra de Introdução de Personagens
+
+Personagens novos não devem simplesmente aparecer dentro da ação sem contexto. A primeira aparição deve responder, ainda que brevemente: Quem é? Como Ester encontrou esse personagem? Por que ele está naquele lugar? Qual é sua primeira característica marcante? Só depois da apresentação o personagem participa da aventura.
+
+Personagens já existentes que retornam devem ser **reapresentados brevemente** (não uma apresentação do zero) — especialmente se a criança puder não lembrar claramente da função deles.
+
+*A entrada de Sofia no Episódio 8 estabelece esse padrão formalmente. O Episódio 6 (Lili e Pipo) foi produzido antes dessa regra existir — serviu de aprendizado para criá-la.*
+
+## Regra de Consistência Visual
+
+Cada personagem oficial deve possuir uma imagem MASTER. Toda nova pose deve usar a MASTER como referência visual. A IA de geração de imagens é apenas ferramenta de produção — a identidade visual oficial pertence à biblioteca do projeto. Nunca criar uma nova versão visual de um personagem sem decisão explícita.
 
 ## Diretriz de Desenvolvimento
 
@@ -123,6 +161,18 @@ No laboratório esse afeto é o Abraço do Papai. No futuro, quando o Método Pr
 Esse pequeno detalhe reforça o verdadeiro propósito do projeto: não é apenas ensinar; é criar memórias afetivas que a criança levará para a vida inteira.
 
 Ver **DIRETRIZ-COMEMORACOES.md** para a especificação completa do sistema de celebrações (níveis 1-3, recompensa final, botão de abraço persistente).
+
+## Prioridades de Evolução da Experiência
+
+Em ordem: mais interação · mais movimento · sons mais naturais · melhor uso dos personagens · transições entre episódios · recompensas visuais · continuidade narrativa · reutilização de assets. Evitar complexidade técnica que prejudique a produção diária.
+
+## Regra de Produção
+
+O projeto está em fase de laboratório e validação. Prioridade: **VALIDAR → APRENDER → DOCUMENTAR → REUTILIZAR → ESCALAR.** Não sacrificar a experiência da criança em nome de complexidade tecnológica.
+
+## Regra de Proteção da Continuidade
+
+Antes de criar qualquer novo episódio, consultar: personagens oficiais, personalidade dos personagens, acontecimentos anteriores, objetos recorrentes, valores já trabalhados, elementos deixados como gancho, regras visuais, biblioteca oficial. Não contradizer a Bíblia do Universo sem uma decisão explícita de evolução.
 
 ## Roadmap Técnico
 
@@ -143,5 +193,24 @@ Personalização automática · IA gerando episódios · painel dos responsávei
 - Episódio 2 → 3: Lili entrega a primeira peça do mapa.
 - Episódio 3 → 4: Lumi entrega a segunda peça; gancho da Torre dos Ventos (ainda não utilizado).
 - Episódio 4 → 5: Foguinho encontra um mapa com um X brilhando ("Será que existe um tesouro?").
+- Episódio 6 → 7: luz verde no céu conduz até o Carvalho.
+- Episódio 7 → 8: o Carvalho revela uma nova trilha, ainda não mostrada em nenhum mapa.
 
 Todas as peças entregues desde o Episódio 2 fazem parte da coleção **Chave da Imaginação**.
+
+## Semente Verde 🌱 (elemento de mistério — Episódio 8)
+
+Uma pequena semente verde brilhante surge no Episódio 8. Está relacionada à continuidade dos elementos verdes descobertos anteriormente (Diamante Verde), mas **seu significado definitivo ainda não deve ser estabelecido.**
+
+Não definir ainda se: possui poderes · pertence ao Diamante Verde · possui origem mágica · dará origem a algo · será utilizada por outro personagem.
+
+Sua função atual é apenas criar curiosidade para episódios futuros — não resolver essa pergunta antecipadamente em nenhum roteiro.
+
+## Registro de Episódios
+
+| Episódio | Título | Tema | Elemento/personagem novo |
+|---|---|---|---|
+| 7 | O Guardião das Histórias | paciência, escuta, cuidado com a natureza | Carvalho, Tito |
+| 8 | O Segredo da Coelhinha Sofia | honestidade, responsabilidade, coragem para dizer a verdade | Sofia, Semente Verde |
+
+*Episódios 7 e 8 já produzidos em HTML. Arte de Tito e Sofia ainda em versão 3D provisória — troca para 2D flat pendente de entrega das novas imagens.*

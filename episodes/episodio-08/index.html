@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Método Presença — As Aventuras de Ester — Ep. 8</title>
+<link rel="stylesheet" href="../../css/base.css">
+<!--
+  ============================================================
+  AS AVENTURAS DE ESTER — Temporada 1
+  Episódio 08 — O Segredo da Coelhinha Sofia 🐰
+
+  Construído sobre a Biblioteca Oficial (css/base.css + js/core.js).
+  Estreia oficial de Sofia. Personagem central: honestidade.
+
+  ⚠️ NOTA DE PRODUÇÃO: as imagens de Sofia (e Tito) ainda estão em
+  estilo 3D — regeneração em 2D flat já solicitada e a caminho.
+  Quando chegarem, trocar os arquivos em assets/characters/sofia/
+  mantendo os MESMOS nomes — este HTML não precisa de nenhuma edição.
+
+  Objetivo pedagógico: honestidade, responsabilidade, coragem,
+  amizade, cooperação, capacidade de reconhecer um erro.
+
+  ÁUDIO COM A VOZ DO PAPAI (opcional) — pasta audio/ ao lado deste arquivo:
+    audio01.mp3  "Alguma coisa se mexeu ali..."
+    audio02.mp3  "Oi... eu sou a Sofia."
+    audio03.mp3  "Eu perdi... uma coisa muito importante."
+    audio04.mp3  "Por onde devemos procurar primeiro, Ester?"
+    audio05.mp3  "Vamos procurar pistas com atenção."
+    audio06.mp3  "Eu preciso contar uma coisa..."
+    audio07.mp3  "Agora que sei a verdade, fica mais fácil ajudar."
+    audio08.mp3  "Encontramos! Olha só o que tem dentro..."
+    audio09.mp3  "Contar a verdade pode ser difícil no começo..."
+    audio10.mp3  "...mas nos ajuda a encontrar o caminho mais rápido."
+    audio11.mp3  "Você ajudou a Sofia a ser corajosa, Ester!"
+    audio12.mp3  "Até a nossa próxima aventura!"
+  ============================================================
+-->
+<style>
+  :root{
+    --ceu1:#F3EAF6; --ceu2:#E9D9F0; --ceu3:#D9C2EA;
+    --creme:#FFFBF2; --lilas:#8B5FBF; --lilas-dark:#5E3E80;
+    --gold:#F2C94C; --ameixa:#231835; --verde:#1F7A4D; --rosa:#F4A6C6;
+  }
+  html,body{ background: linear-gradient(180deg, var(--ceu3) 0%, var(--ceu2) 45%, var(--ceu1) 100%); color:var(--ameixa); }
+  #progress-fill{ background: linear-gradient(90deg, var(--lilas), var(--rosa), var(--gold)); }
+  h1.title-plaque{ color:var(--lilas-dark); border:4px dashed var(--gold); }
+  .episode-tag{ background:var(--lilas); }
+  p.speech{ color:var(--ameixa); }
+  .papai-card{ background:#F6F0FA; border-color:var(--lilas); color:var(--lilas-dark); }
+  .papai-card .tag{ background:var(--lilas); }
+  .btn{ background:linear-gradient(180deg,var(--lilas),var(--lilas-dark)); box-shadow:0 6px 0 #3E2856,0 8px 16px rgba(0,0,0,0.15); }
+  .btn.secondary{ background:linear-gradient(180deg,#FFE07D,var(--gold)); box-shadow:0 6px 0 #D9A521,0 8px 16px rgba(0,0,0,0.15); color:var(--ameixa); }
+  .card{ background:var(--creme); }
+  #choice-status{ margin-top:10px; font-weight:800; color:var(--lilas); min-height:1.4em; }
+
+  #sky{ position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+  .hill-em{ position:absolute; bottom:0; left:0; width:100%; height:20%; background:var(--lilas); border-radius:50% 50% 0 0/100% 100% 0 0; transform:scaleX(1.4); opacity:0.25; }
+
+  .char-frame{ display:flex; justify-content:center; margin:6px 0 10px; }
+  .char-frame img{ width:110px; height:auto; border-radius:20px; background:#fff; padding:6px; box-shadow:0 6px 16px rgba(60,30,80,0.18); animation:char-bounce 2s ease-in-out infinite; }
+  .char-frame.small img{ width:64px; }
+  .char-frame.big img{ width:150px; }
+  @keyframes char-bounce{ 0%,100%{ transform:translateY(0) rotate(-2deg);} 50%{ transform:translateY(-8px) rotate(2deg);} }
+  .char-row{ display:flex; justify-content:center; gap:12px; align-items:flex-end; margin-bottom:6px; flex-wrap:wrap; }
+
+  .path-row{ display:flex; justify-content:center; gap:12px; margin:14px 0; flex-wrap:wrap; }
+  .path-item{ background:#fff; border-radius:16px; padding:16px 10px; cursor:pointer; box-shadow:0 4px 10px rgba(60,30,80,0.15); border:3px solid transparent; flex:1; max-width:130px; text-align:center; transition:transform 0.12s ease; }
+  .path-item.right{ border-color:var(--gold); background:var(--lilas); color:#fff; }
+  .path-item.explored{ border-color:var(--verde); background:#EAF7F0; }
+  .path-item .pi{ font-size:2rem; }
+  .path-item .pl{ font-family:Calibri,sans-serif; font-weight:800; font-size:0.78rem; margin-top:6px; }
+
+  .clue-text{ background:#fff; border-radius:12px; padding:10px 14px; margin-top:10px; font-size:0.9rem; color:var(--lilas-dark); text-align:left; max-width:300px; margin-left:auto; margin-right:auto; }
+
+  .box-emoji{ font-size:4.2rem; cursor:pointer; animation:box-wobble 1.4s ease-in-out infinite; }
+  @keyframes box-wobble{ 0%,100%{ transform:rotate(-4deg);} 50%{ transform:rotate(4deg);} }
+
+  .night-card{ background:radial-gradient(ellipse at top, var(--lilas-dark), #1A1129); border-radius:32px; padding:24px 20px; color:#fff; }
+  .night-card p.speech{ color:#F6F0FA; }
+  .night-card .papai-card{ background:rgba(255,255,255,0.12); border-color:#F6F0FA; color:#F6F0FA; }
+  .night-card .papai-card .tag{ background:#F6F0FA; color:var(--lilas-dark); }
+
+  @media (max-width:360px){ h1.title-plaque{ font-size:1.15rem;} .path-row{ gap:8px;} }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="sky"><div class="hill-em"></div></div>
+  <button id="info-btn" title="Instruções para o papai">ℹ️</button>
+  <div id="progress-wrap"><div id="progress-track"><div id="progress-fill"></div></div></div>
+  <div id="stage"><div class="card" id="card"></div></div>
+  <div id="nav">
+    <button class="nav-btn" id="btn-back">◀ Voltar</button>
+    <div class="nav-spacer"></div>
+    <button class="nav-btn" id="btn-next">Próximo ▶</button>
+  </div>
+</div>
+
+<div id="info-modal">
+  <div class="box">
+    <h3>🎙️ Como usar sua voz neste episódio</h3>
+    <p>Grave frases curtas (3 a 8s) e salve em <code>episodes/episodio-08/audio/</code>:</p>
+    <p>
+      <code>audio01.mp3</code> — "Alguma coisa se mexeu ali..."<br>
+      <code>audio02.mp3</code> — "Oi... eu sou a Sofia."<br>
+      <code>audio03.mp3</code> — "Eu perdi... uma coisa muito importante."<br>
+      <code>audio04.mp3</code> — "Por onde devemos procurar primeiro, Ester?"<br>
+      <code>audio05.mp3</code> — "Vamos procurar pistas com atenção."<br>
+      <code>audio06.mp3</code> — "Eu preciso contar uma coisa..."<br>
+      <code>audio07.mp3</code> — "Agora que sei a verdade, fica mais fácil ajudar."<br>
+      <code>audio08.mp3</code> — "Encontramos! Olha só o que tem dentro..."<br>
+      <code>audio09.mp3</code> — "Contar a verdade pode ser difícil no começo..."<br>
+      <code>audio10.mp3</code> — "...mas nos ajuda a encontrar o caminho mais rápido."<br>
+      <code>audio11.mp3</code> — "Você ajudou a Sofia a ser corajosa, Ester!"<br>
+      <code>audio12.mp3</code> — "Até a nossa próxima aventura!"
+    </p>
+    <p>Estreia da Sofia — a nova trilha revelada pelo Carvalho no Episódio 7 leva até ela.</p>
+    <button class="btn secondary" onclick="document.getElementById('info-modal').classList.remove('open')">Entendi!</button>
+  </div>
+</div>
+
+<script src="../../js/core.js"></script>
+<script>
+const IMG = {
+  aurora: '../../assets/characters/aurora/aurora-sorrindo.webp',
+  lumi: '../../assets/characters/lumi/lumi-sorrindo.webp',
+  fog_feliz: '../../assets/characters/foguinho/foguinho-feliz.webp',
+  fog_curioso: '../../assets/characters/foguinho/foguinho-curioso.webp',
+  fog_empolgado: '../../assets/characters/foguinho/foguinho-empolgado.webp',
+  fog_comemorando: '../../assets/characters/foguinho/foguinho-comemorando.webp',
+  pipo_oficial: '../../assets/characters/pipo/pipo-oficial-v1.0.webp',
+  pipo_apontando: '../../assets/characters/pipo/pipo-apontando.webp',
+  pipo_comemorando: '../../assets/characters/pipo/pipo-comemorando.webp',
+  sofia_oficial: '../../assets/characters/sofia/sofia-oficial-v1.0.webp',
+  sofia_curiosa: '../../assets/characters/sofia/sofia-curiosa.webp',
+  sofia_timida: '../../assets/characters/sofia/sofia-timida.webp',
+  sofia_feliz: '../../assets/characters/sofia/sofia-feliz.webp',
+  sofia_semente: '../../assets/characters/sofia/sofia-entregando-semente.webp',
+};
+function charImg(src, cls){ return `<img src="${src}" alt="" class="${cls||''}">`; }
+
+const state = { scene:0, spotsExplored:0, hugClicks:0 };
+const cardEl = document.getElementById('card');
+const fillEl = document.getElementById('progress-fill');
+const backBtn = document.getElementById('btn-back');
+const nextBtn = document.getElementById('btn-next');
+const skyEl = document.getElementById('sky');
+const TOTAL_SCENES = 12;
+
+document.getElementById('info-btn').onclick = ()=> document.getElementById('info-modal').classList.add('open');
+seedBackgroundStars(skyEl, 8);
+
+const CLUES = [
+  { icon:'🌿', label:'FOLHAS', text:'Algumas folhas estão amassadas — alguém passou por aqui correndo.' },
+  { icon:'🐾', label:'PEGADAS', text:'Pegadinhas pequenas e apressadas seguem em direção ao riacho.' },
+  { icon:'🎀', label:'FITINHA', text:'Uma fitinha verde ficou presa num galho baixo.' },
+];
+
+function renderScene(){
+  const s = state.scene;
+  backBtn.style.visibility = (s===0) ? 'hidden' : 'visible';
+  nextBtn.style.visibility = 'visible';
+  fillEl.style.width = (s/TOTAL_SCENES*100)+'%';
+  let html = '';
+
+  // 0. Continuação da trilha + sinais
+  if(s===0){
+    nextBtn.style.visibility = 'hidden';
+    html = `
+      <div class="night-card">
+        <div style="font-size:2.2rem;">🌳➜🌲</div>
+        <p class="speech">A trilha nova que o Carvalho mostrou segue por entre as árvores...<br>e de repente, um barulhinho diferente. 👂</p>
+        ${papaiCard(null, 'Fade suave saindo da clareira do Carvalho. Som: vento + folhas + pássaros mudando aos poucos. Algo se move perto dali.')}
+        <div class="btn-row"><button class="btn huge" id="continue-btn">✨ Continuar</button></div>
+      </div>`;
+  }
+  // 1. Primeira aparição de Sofia
+  else if(s===1){
+    html = `
+      <div class="char-frame">${charImg(IMG.sofia_timida)}</div>
+      <p class="speech">"Oi... eu sou a Sofia."</p>
+      <p class="speech" style="font-style:italic; font-size:0.95rem;">Ela está com as orelhas baixinhas, meio escondida atrás de uma touceira.</p>
+      ${papaiCard('Oi... eu sou a Sofia.', 'Ela parece tímida e um pouco nervosa. Não force — deixe o silêncio dela existir por um instante.')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  // 2. Sofia explica que perdeu algo
+  else if(s===2){
+    html = `
+      <div class="char-row">
+        <div class="char-frame small">${charImg(IMG.aurora)}</div>
+        <div class="char-frame">${charImg(IMG.sofia_timida)}</div>
+      </div>
+      <p class="speech">"Eu perdi... uma coisa muito importante."</p>
+      <p class="speech" style="font-style:italic; font-size:0.9rem;">Aurora: "O que foi, Sofia?" — Sofia: "Uma... caixinha verde."</p>
+      <p class="speech" style="font-size:0.9rem;">Foguinho: "A gente te ajuda a procurar!"</p>
+      ${papaiCard('Eu perdi... uma coisa muito importante.', 'Ela hesita ao contar — algo mais parece estar incomodando ela, mas ainda não é hora de perguntar.')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  // 3. Escolha de onde procurar
+  else if(s===3){
+    html = `
+      <div class="char-frame">${charImg(IMG.pipo_apontando)}</div>
+      <p class="speech">"Por onde devemos procurar primeiro, Ester?"</p>
+      <div class="path-row">
+        <div class="path-item" data-loc="flores"><div class="pi">🌸</div><div class="pl">CANTEIRO DE FLORES</div></div>
+        <div class="path-item" data-loc="riacho"><div class="pi">💧</div><div class="pl">PERTO DO RIACHO</div></div>
+        <div class="path-item" data-loc="pedras"><div class="pi">🪨</div><div class="pl">ATRÁS DAS PEDRAS</div></div>
+      </div>
+      ${papaiCard('Por onde devemos procurar primeiro, Ester?', 'Não existe escolha errada — qualquer lugar leva ao próximo passo da busca.')}`;
+  }
+  // 4. Busca — 3 pistas interativas
+  else if(s===4){
+    html = `
+      <div class="char-frame">${charImg(IMG.fog_curioso)}</div>
+      <p class="speech">"Vamos procurar pistas com atenção."</p>
+      <div class="path-row">
+        ${CLUES.map((c,i)=>`<div class="path-item" data-clue="${i}"><div class="pi">${c.icon}</div><div class="pl">${c.label}</div></div>`).join('')}
+      </div>
+      <div id="clue-texts"></div>
+      ${papaiCard('Vamos procurar pistas com atenção.', 'Toque nas três pistas com a Ester, uma de cada vez, antes de seguir em frente.')}
+      <div class="btn-row"><button class="nav-btn" id="continue-btn" style="opacity:0.5; pointer-events:none;">Continuar ➜ (explore as 3 pistas)</button></div>`;
+  }
+  // 5. Sofia revela a verdade
+  else if(s===5){
+    html = `
+      <div class="char-frame">${charImg(IMG.sofia_timida)}</div>
+      <p class="speech">"Eu preciso contar uma coisa..."</p>
+      <p class="speech" style="font-size:0.95rem;">"Eu não podia ter levado a caixinha tão longe de casa sozinha.<br>Fiquei com medo de contar, e por isso ela se perdeu."</p>
+      <p class="speech" style="font-style:italic; font-size:0.9rem;">Aurora sorri gentilmente: "Obrigada por nos contar, Sofia."</p>
+      ${papaiCard('Eu preciso contar uma coisa...', 'O momento mais importante do episódio. Sofia admite o que aconteceu de verdade — sem culpa pesada, com acolhimento.')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  // 6. Busca continua juntos, agora com a verdade
+  else if(s===6){
+    html = `
+      <div class="char-row">
+        <div class="char-frame small">${charImg(IMG.pipo_oficial)}</div>
+        <div class="char-frame small">${charImg(IMG.fog_empolgado)}</div>
+        <div class="char-frame small">${charImg(IMG.sofia_curiosa)}</div>
+      </div>
+      <p class="speech">"Agora que sei a verdade, fica mais fácil ajudar."</p>
+      <p class="speech" style="font-size:0.9rem;">Todos seguem juntos a fitinha verde, que leva direto ao riacho.</p>
+      ${papaiCard('Agora que sei a verdade, fica mais fácil ajudar.', 'Assim que ela conta, a busca anda muito mais rápido — a lição vira ação, não sermão.')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  // 7. Encontram a caixinha
+  else if(s===7){
+    html = `
+      <div class="char-frame">${charImg(IMG.sofia_curiosa)}</div>
+      <p class="speech">"Encontramos! Olha só o que tem dentro..."</p>
+      <div class="box-emoji" id="box-el">📦</div>
+      <p class="speech" style="font-size:0.9rem;">A caixinha verde está ali, presa entre duas pedrinhas na margem do riacho.</p>
+      ${papaiCard('Encontramos! Olha só o que tem dentro...', 'Toque na caixinha com a Ester antes de continuar.')}
+      <div class="btn-row"><button class="nav-btn" id="continue-btn">Abrir a caixinha ➜</button></div>`;
+  }
+  // 8. Descoberta da semente verde
+  else if(s===8){
+    html = `
+      <div class="char-frame">${charImg(IMG.sofia_semente)}</div>
+      <div style="font-size:2.4rem;">🌱✨</div>
+      <p class="speech">Dentro da caixinha... uma pequena semente verde brilhante.</p>
+      <p class="speech" style="font-style:italic; font-size:0.9rem;">Ninguém sabe exatamente o que ela é. Mas todos sentem que é especial.</p>
+      ${papaiCard(null, 'Não explique o que a semente é — ela é mistério de propósito, gancho pro próximo episódio.')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  // 9. Mensagem de valor
+  else if(s===9){
+    html = `
+      <div class="char-row">
+        <div class="char-frame small">${charImg(IMG.aurora)}</div>
+        <div class="char-frame">${charImg(IMG.sofia_feliz)}</div>
+      </div>
+      <p class="speech">"Contar a verdade pode ser difícil no começo..."</p>
+      <p class="speech" style="font-weight:800;">"...mas nos ajuda a encontrar o caminho mais rápido."</p>
+      ${papaiCard('Contar a verdade pode ser difícil no começo... mas nos ajuda a encontrar o caminho mais rápido.', 'A lição do episódio, dita de leve — sem soar como sermão.')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  // 10. Comemoração
+  else if(s===10){
+    html = `
+      <div class="char-row">
+        <div class="char-frame small">${charImg(IMG.sofia_feliz)}</div>
+        <div class="char-frame">${charImg(IMG.fog_comemorando)}</div>
+        <div class="char-frame small">${charImg(IMG.pipo_comemorando)}</div>
+      </div>
+      <p class="speech">Todos comemoram juntos! 🎉</p>
+      ${papaiCard(null, 'Cada clique traz uma combinação diferente: corações, flores rosas e vermelhas, estrelas e brilhos.')}
+      <div class="btn-row"><button class="btn huge" id="celebrate-btn">🎉 Comemorar!</button></div>
+      <div class="btn-row"><button class="nav-btn" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  // 11. Abraço do Papai
+  else if(s===11){
+    nextBtn.style.visibility = 'hidden';
+    html = `
+      <div class="char-frame big">${charImg(IMG.sofia_feliz)}</div>
+      <p class="speech" style="font-weight:800;">❤️ "Você ajudou a Sofia a ser corajosa!"</p>
+      ${papaiCard('Você ajudou a Sofia a ser corajosa, Ester!')}
+      <div class="btn-row"><button class="btn huge" id="hug-btn">🤗 ABRAÇO DO PAPAI</button></div>
+      <p class="speech" style="font-size:0.95rem;">❤️ 🌸 ⭐ ✨ — pode clicar quantas vezes quiser</p>
+      <div class="btn-row"><button class="nav-btn" id="ending-btn">Continuar ➜</button></div>`;
+  }
+  // 12. Gancho pro Ep.9
+  else if(s===12){
+    nextBtn.style.visibility = 'hidden';
+    html = `
+      <div class="night-card">
+        <div class="char-frame">${charImg(IMG.sofia_semente)}</div>
+        <p class="speech" style="font-size:0.95rem; font-style:italic;">A semente verde brilha baixinho no bolso de Sofia...<br>ninguém sabe de onde ela veio.</p>
+        <p class="speech" style="font-weight:800; margin-top:14px;">Continua...</p>
+        ${papaiCard('Até a nossa próxima aventura!', 'Fade final. Som: vento + folhas + um pequeno brilho de mistério.')}
+        <div class="btn-row"><button class="nav-btn" id="restart-btn">Reviver a aventura 🔁</button></div>
+      </div>`;
+  }
+
+  cardEl.innerHTML = html;
+  attachSceneEvents();
+}
+
+function attachSceneEvents(){
+  const s = state.scene;
+
+  if(s===0){ playVoice('audio01'); playSfx('ambience/folhas',[500,400]); document.getElementById('continue-btn').onclick = ()=> goTo(1); }
+
+  if(s===1){ playVoice('audio02'); document.getElementById('continue-btn').onclick = ()=> goTo(2); }
+
+  if(s===2){ playVoice('audio03'); document.getElementById('continue-btn').onclick = ()=> goTo(3); }
+
+  if(s===3){
+    playVoice('audio04');
+    document.querySelectorAll('.path-item[data-loc]').forEach(item=>{
+      item.onclick = ()=>{
+        item.classList.add('right');
+        sparkles(8);
+        setTimeout(()=> goTo(4), 700);
+      };
+    });
+  }
+
+  if(s===4){
+    playVoice('audio05');
+    state.spotsExplored = 0;
+    document.querySelectorAll('.path-item[data-clue]').forEach(item=>{
+      item.onclick = ()=>{
+        if(item.classList.contains('explored')) return;
+        item.classList.add('explored');
+        state.spotsExplored++;
+        const clue = CLUES[item.dataset.clue];
+        const p = document.createElement('div');
+        p.className = 'clue-text';
+        p.textContent = `${clue.icon} ${clue.text}`;
+        document.getElementById('clue-texts').appendChild(p);
+        chime([700,900]);
+        if(state.spotsExplored === CLUES.length){
+          const btn = document.getElementById('continue-btn');
+          btn.style.opacity = 1;
+          btn.style.pointerEvents = 'auto';
+          btn.textContent = 'Continuar ➜';
+          btn.onclick = ()=> goTo(5);
+        }
+      };
+    });
+  }
+
+  if(s===5){ playVoice('audio06'); document.getElementById('continue-btn').onclick = ()=> goTo(6); }
+
+  if(s===6){ playVoice('audio07'); document.getElementById('continue-btn').onclick = ()=> goTo(7); }
+
+  if(s===7){
+    const box = document.getElementById('box-el');
+    if(box) box.onclick = ()=>{ playSfx('rewards/brilho',[900,1200]); sparkles(6); };
+    document.getElementById('continue-btn').onclick = ()=>{ playVoice('audio08'); goTo(8); };
+  }
+
+  if(s===8){ crystalShine(8); document.getElementById('continue-btn').onclick = ()=> goTo(9); }
+
+  if(s===9){ playVoice('audio09'); setTimeout(()=> playVoice('audio10'), 2200); document.getElementById('continue-btn').onclick = ()=> goTo(10); }
+
+  if(s===10){
+    document.getElementById('celebrate-btn').onclick = ()=>{
+      hearts(12);
+      setTimeout(()=>flowers(14), 300);
+      setTimeout(()=>sparkles(12), 600);
+      setTimeout(()=>confetti(26), 900);
+    };
+    document.getElementById('continue-btn').onclick = ()=> goTo(11);
+  }
+
+  if(s===11){
+    document.getElementById('hug-btn').onclick = ()=>{
+      state.hugClicks++;
+      hugCelebration();
+      if(state.hugClicks===1) playVoice('audio11');
+    };
+    document.getElementById('ending-btn').onclick = ()=> goTo(12);
+  }
+
+  if(s===12){
+    playVoice('audio12');
+    document.getElementById('restart-btn').onclick = ()=>{
+      state.scene=0; state.spotsExplored=0; state.hugClicks=0;
+      goTo(0);
+    };
+  }
+}
+
+function goTo(idx){
+  state.scene = Math.max(0, Math.min(TOTAL_SCENES, idx));
+  renderScene();
+}
+backBtn.onclick = ()=> goTo(state.scene-1);
+nextBtn.onclick = ()=> goTo(state.scene+1);
+
+renderScene();
+</script>
+</body>
+</html>
