@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Método Presença — As Aventuras de Ester — Ep. 9</title>
+<link rel="stylesheet" href="../../css/base.css">
+<!--
+  ============================================================
+  AS AVENTURAS DE ESTER — Temporada 1
+  Episódio 09 — O Jardim da Gratidão 🌱❤️
+
+  Construído sobre a Biblioteca Oficial (css/base.css + js/core.js).
+  Sem personagens novos — usa todo o elenco já estabelecido.
+
+  Valor moral: GRATIDÃO (ainda não trabalhado nos episódios anteriores).
+  Letra trabalhada discretamente: A (amor, amigo, abraço, água) —
+  fugindo da letra E, já usada nos Episódios 5 e 6.
+
+  Continuidade: começa exatamente onde o Episódio 8 parou — a semente
+  verde misteriosa. O mistério dela SEGUE não resolvido de propósito.
+
+  ÁUDIO COM A VOZ DO PAPAI (opcional) — pasta audio/ ao lado deste arquivo:
+    audio01.mp3  "A semente ainda brilha baixinho..."
+    audio02.mp3  "Vamos plantar a semente juntos?"
+    audio03.mp3  "Água ela precisa. Mas talvez precise de mais uma coisa."
+    audio04.mp3  "Obrigado, Ester, por..."
+    audio05.mp3  "Agora é sua vez, Ester. A quem você quer agradecer?"
+    audio06.mp3  "Repara... todas essas palavras começam do mesmo jeitinho."
+    audio07.mp3  "Olha! Alguma coisa está acontecendo..."
+    audio08.mp3  "Você regou a semente com gratidão, Ester!"
+    audio09.mp3  "Até a nossa próxima aventura!"
+  ============================================================
+-->
+<style>
+  :root{
+    --ceu1:#FFF3E6; --ceu2:#FFE3C2; --ceu3:#FFCB99;
+    --creme:#FFFBF2; --coral:#FF7A5C; --coral-dark:#C6432A;
+    --gold:#F2C94C; --ameixa:#3A2418; --verde:#1F7A4D;
+  }
+  html,body{ background: linear-gradient(180deg, var(--ceu3) 0%, var(--ceu2) 45%, var(--ceu1) 100%); color:var(--ameixa); }
+  #progress-fill{ background: linear-gradient(90deg, var(--coral), var(--gold), var(--verde)); }
+  h1.title-plaque{ color:var(--coral-dark); border:4px dashed var(--gold); }
+  .episode-tag{ background:var(--coral); }
+  p.speech{ color:var(--ameixa); }
+  .papai-card{ background:#FFF3E9; border-color:var(--coral); color:var(--coral-dark); }
+  .papai-card .tag{ background:var(--coral); }
+  .btn{ background:linear-gradient(180deg,var(--coral),var(--coral-dark)); box-shadow:0 6px 0 #8A2E1C,0 8px 16px rgba(0,0,0,0.15); }
+  .btn.secondary{ background:linear-gradient(180deg,#FFE07D,var(--gold)); box-shadow:0 6px 0 #D9A521,0 8px 16px rgba(0,0,0,0.15); color:var(--ameixa); }
+  .card{ background:var(--creme); }
+  #choice-status{ margin-top:10px; font-weight:800; color:var(--coral-dark); min-height:1.4em; }
+
+  #sky{ position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+  .hill-em{ position:absolute; bottom:0; left:0; width:100%; height:20%; background:var(--verde); border-radius:50% 50% 0 0/100% 100% 0 0; transform:scaleX(1.4); opacity:0.22; }
+
+  .char-frame{ display:flex; justify-content:center; margin:6px 0 10px; }
+  .char-frame img{ width:105px; height:auto; border-radius:20px; background:#fff; padding:6px; box-shadow:0 6px 16px rgba(90,40,20,0.18); animation:char-bounce 2s ease-in-out infinite; }
+  .char-frame.small img{ width:60px; }
+  .char-frame.big img{ width:145px; }
+  @keyframes char-bounce{ 0%,100%{ transform:translateY(0) rotate(-2deg);} 50%{ transform:translateY(-8px) rotate(2deg);} }
+  .char-row{ display:flex; justify-content:center; gap:10px; align-items:flex-end; margin-bottom:6px; flex-wrap:wrap; }
+
+  .path-row{ display:flex; justify-content:center; gap:12px; margin:14px 0; flex-wrap:wrap; }
+  .path-item{ background:#fff; border-radius:16px; padding:16px 10px; cursor:pointer; box-shadow:0 4px 10px rgba(90,40,20,0.15); border:3px solid transparent; flex:1; max-width:130px; text-align:center; }
+  .path-item.right{ border-color:var(--gold); background:var(--coral); color:#fff; }
+  .path-item .pi{ font-size:2rem; }
+  .path-item .pl{ font-family:Calibri,sans-serif; font-weight:800; font-size:0.78rem; margin-top:6px; }
+
+  .seed-emoji{ font-size:3.6rem; animation:seed-pulse 1.8s ease-in-out infinite; }
+  @keyframes seed-pulse{ 0%,100%{ transform:scale(1);} 50%{ transform:scale(1.12);} }
+
+  .word-card{ background:#fff; border:2px solid var(--coral); border-radius:16px; padding:16px; text-align:center; margin:12px auto; max-width:200px; }
+  .word-card .we{ font-size:2.2rem; }
+  .word-card .wt{ font-family:Calibri,sans-serif; font-weight:800; color:var(--coral-dark); font-size:1rem; margin-top:6px; }
+  .word-dots{ display:flex; justify-content:center; gap:6px; margin-top:10px; }
+  .word-dot{ width:8px; height:8px; border-radius:50%; background:#ddd; }
+  .word-dot.active{ background: var(--coral); }
+
+  .night-card{ background:radial-gradient(ellipse at top, #6B3420, #2A160C); border-radius:32px; padding:24px 20px; color:#fff; }
+  .night-card p.speech{ color:#FFF3E6; }
+  .night-card .papai-card{ background:rgba(255,255,255,0.14); border-color:#FFF3E6; color:#FFF3E6; }
+  .night-card .papai-card .tag{ background:#FFF3E6; color:var(--coral-dark); }
+
+  @media (max-width:360px){ h1.title-plaque{ font-size:1.15rem;} .path-row{ gap:8px;} }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="sky"><div class="hill-em"></div></div>
+  <button id="info-btn" title="Instruções para o papai">ℹ️</button>
+  <div id="progress-wrap"><div id="progress-track"><div id="progress-fill"></div></div></div>
+  <div id="stage"><div class="card" id="card"></div></div>
+  <div id="nav">
+    <button class="nav-btn" id="btn-back">◀ Voltar</button>
+    <div class="nav-spacer"></div>
+    <button class="nav-btn" id="btn-next">Próximo ▶</button>
+  </div>
+</div>
+
+<div id="info-modal">
+  <div class="box">
+    <h3>🎙️ Como usar sua voz neste episódio</h3>
+    <p>Grave frases curtas (3 a 8s) e salve em <code>episodes/episodio-09/audio/</code>:</p>
+    <p>
+      <code>audio01.mp3</code> — "A semente ainda brilha baixinho..."<br>
+      <code>audio02.mp3</code> — "Vamos plantar a semente juntos?"<br>
+      <code>audio03.mp3</code> — "Água ela precisa. Mas talvez precise de mais uma coisa."<br>
+      <code>audio04.mp3</code> — "Obrigado, Ester, por..."<br>
+      <code>audio05.mp3</code> — "Agora é sua vez, Ester. A quem você quer agradecer?"<br>
+      <code>audio06.mp3</code> — "Repara... todas essas palavras começam do mesmo jeitinho."<br>
+      <code>audio07.mp3</code> — "Olha! Alguma coisa está acontecendo..."<br>
+      <code>audio08.mp3</code> — "Você regou a semente com gratidão, Ester!"<br>
+      <code>audio09.mp3</code> — "Até a nossa próxima aventura!"
+    </p>
+    <p>Sem personagens novos — todo o elenco já é conhecido da Ester. A semente do Ep.8 continua em mistério.</p>
+    <button class="btn secondary" onclick="document.getElementById('info-modal').classList.remove('open')">Entendi!</button>
+  </div>
+</div>
+
+<script src="../../js/core.js"></script>
+<script>
+const IMG = {
+  aurora: '../../assets/characters/aurora/aurora-sorrindo.webp',
+  lumi: '../../assets/characters/lumi/lumi-sorrindo.webp',
+  fog_feliz: '../../assets/characters/foguinho/foguinho-feliz.webp',
+  fog_empolgado: '../../assets/characters/foguinho/foguinho-empolgado.webp',
+  fog_comemorando: '../../assets/characters/foguinho/foguinho-comemorando.webp',
+  lili_pousada: '../../assets/characters/lili/lili-pousada.webp',
+  lili_voo: '../../assets/characters/lili/lili-voo-feliz.webp',
+  pipo_oficial: '../../assets/characters/pipo/pipo-oficial-v1.0.webp',
+  pipo_comemorando: '../../assets/characters/pipo/pipo-comemorando.webp',
+  sofia_feliz: '../../assets/characters/sofia/sofia-feliz.webp',
+  sofia_semente: '../../assets/characters/sofia/sofia-entregando-semente.webp',
+  carvalho_acordado: '../../assets/characters/carvalho/carvalho-acordado-sorrindo.webp',
+  carvalho_falando: '../../assets/characters/carvalho/carvalho-falando.webp',
+};
+function charImg(src, cls){ return `<img src="${src}" alt="" class="${cls||''}">`; }
+
+const state = { scene:0, thankIndex:0, hugClicks:0 };
+const cardEl = document.getElementById('card');
+const fillEl = document.getElementById('progress-fill');
+const backBtn = document.getElementById('btn-back');
+const nextBtn = document.getElementById('btn-next');
+const skyEl = document.getElementById('sky');
+const TOTAL_SCENES = 11;
+
+document.getElementById('info-btn').onclick = ()=> document.getElementById('info-modal').classList.add('open');
+seedBackgroundStars(skyEl, 6);
+
+const WORDS = [
+  { e:'❤️', t:'AMOR' }, { e:'🧑‍🤝‍🧑', t:'AMIGO' }, { e:'🤗', t:'ABRAÇO' }, { e:'💧', t:'ÁGUA' },
+];
+const THANKS = [
+  { img: IMG.fog_empolgado, name:'Foguinho', txt:'"Obrigado, Ester, pela sua coragem lá no Diamante Verde!"' },
+  { img: IMG.lili_voo, name:'Lili', txt:'"Obrigada pela sua amizade em cada mensagem que troquei com você!"' },
+  { img: IMG.pipo_oficial, name:'Pipo', txt:'"Obrigado por caminhar junto comigo, mesmo quando minhas invenções não funcionam!"' },
+  { img: IMG.carvalho_falando, name:'Carvalho', txt:'"Obrigado por aprender a escutar. Isso me acordou, lembra?"' },
+  { img: IMG.sofia_feliz, name:'Sofia', txt:'"Obrigada por me ajudar a ter coragem de contar a verdade."' },
+];
+
+function renderScene(){
+  const s = state.scene;
+  backBtn.style.visibility = (s===0) ? 'hidden' : 'visible';
+  nextBtn.style.visibility = 'visible';
+  fillEl.style.width = (s/TOTAL_SCENES*100)+'%';
+  let html = '';
+
+  // 0. Transição do Ep.8
+  if(s===0){
+    nextBtn.style.visibility = 'hidden';
+    html = `
+      <div class="night-card">
+        <div class="char-frame">${charImg(IMG.sofia_semente)}</div>
+        <div class="seed-emoji">🌱</div>
+        <p class="speech">A semente verde ainda brilha baixinho...<br>ninguém sabe exatamente o que ela é.</p>
+        ${papaiCard('A semente ainda brilha baixinho...', 'Manhã seguinte, luz do dia. A câmera revela um pequeno jardim perto da árvore do Carvalho.')}
+        <div class="btn-row"><button class="btn huge" id="continue-btn">✨ Continuar</button></div>
+      </div>`;
+  }
+  // 1. Aurora sugere plantar
+  else if(s===1){
+    html = `
+      <div class="char-frame">${charImg(IMG.aurora)}</div>
+      <p class="speech">"Vamos plantar a semente juntos?"</p>
+      <p class="speech" style="font-size:0.9rem; font-style:italic;">"Talvez, cuidando dela, a gente descubra o que ela guarda."</p>
+      ${papaiCard('Vamos plantar a semente juntos?', 'Som de passarinhos e vento leve — dia calmo, sem pressa nenhuma.')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  // 2. Escolha do lugar
+  else if(s===2){
+    html = `
+      <p class="speech">Onde vamos plantar a semente, Ester?</p>
+      <div class="path-row">
+        <div class="path-item" data-loc="sol"><div class="pi">☀️</div><div class="pl">CANTEIRO ENSOLARADO</div></div>
+        <div class="path-item" data-loc="riacho"><div class="pi">💧</div><div class="pl">PERTO DO RIACHO</div></div>
+        <div class="path-item" data-loc="carvalho"><div class="pi">🌳</div><div class="pl">SOMBRA DO CARVALHO</div></div>
+      </div>
+      ${papaiCard(null, 'Não existe lugar errado — qualquer escolha leva ao próximo passo.')}`;
+  }
+  // 3. Plantam + Aurora explica sobre gratidão
+  else if(s===3){
+    html = `
+      <div class="char-row">
+        <div class="char-frame small">${charImg(IMG.aurora)}</div>
+        <div class="char-frame small">${charImg(IMG.fog_feliz)}</div>
+      </div>
+      <div class="seed-emoji">🌱</div>
+      <p class="speech">"Água ela precisa. Mas talvez precise de mais uma coisa."</p>
+      <p class="speech" style="font-weight:700;">"Ela pode crescer com a nossa gratidão."</p>
+      ${papaiCard('Água ela precisa. Mas talvez precise de mais uma coisa.', 'A semente é coberta com terrinha. Todos se reúnem ao redor dela.')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  // 4-8. Rodada de gratidão (5 personagens, um por vez)
+  else if(s>=4 && s<=8){
+    const t = THANKS[s-4];
+    html = `
+      <div class="char-frame">${charImg(t.img)}</div>
+      <p class="speech" style="font-weight:700;">${t.name}:</p>
+      <p class="speech">${t.txt}</p>
+      ${papaiCard(null, 'Uma pequena gota de luz cai sobre a terrinha a cada agradecimento.')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  // 9. Ester agradece
+  else if(s===9){
+    html = `
+      <div class="char-row">
+        <div class="char-frame small">${charImg(IMG.lumi)}</div>
+        <div class="char-frame small">${charImg(IMG.sofia_feliz)}</div>
+      </div>
+      <p class="speech">"Agora é sua vez, Ester. A quem você quer agradecer?"</p>
+      ${conversaCard('A quem você quer agradecer hoje?')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Já agradeci ➜</button></div>`;
+  }
+  // 10. As palavras da gratidão (letra A discreta)
+  else if(s===10){
+    if(state.thankIndex >= WORDS.length){
+      html = `
+        <div class="char-frame">${charImg(IMG.aurora)}</div>
+        <p class="speech">"Repara... todas essas palavras começam do mesmo jeitinho."</p>
+        <p class="speech" style="font-size:2.4rem; font-weight:800; color:var(--coral-dark);">A</p>
+        ${papaiCard('Repara... todas essas palavras começam do mesmo jeitinho.', 'Não precisa nomear "a letra A" formalmente — deixe a Ester perceber sozinha, se conseguir.')}
+        <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+    } else {
+      const w = WORDS[state.thankIndex];
+      html = `
+        <div class="word-card"><div class="we">${w.e}</div><div class="wt">${w.t}</div></div>
+        <div class="word-dots">${WORDS.map((_,i)=>`<span class="word-dot ${i===state.thankIndex?'active':''}"></span>`).join('')}</div>
+        ${papaiCard(null, 'Leia a palavra em voz alta com a Ester antes de avançar.')}
+        <div class="btn-row"><button class="btn secondary" id="word-next">Próxima palavra ➜</button></div>`;
+    }
+  }
+  // 11. A semente reage (brotinho) — vira scene 11 mas TOTAL_SCENES conta até aqui; ajustar abaixo
+  cardEl.innerHTML = html;
+  attachSceneEvents();
+}
+
+function attachSceneEvents(){
+  const s = state.scene;
+
+  if(s===0){ playVoice('audio01'); playSfx('weather/vento-leve',[400,350]); document.getElementById('continue-btn').onclick = ()=> goTo(1); }
+
+  if(s===1){ playVoice('audio02'); playSfx('ambience/passaros',[900,700]); document.getElementById('continue-btn').onclick = ()=> goTo(2); }
+
+  if(s===2){
+    document.querySelectorAll('.path-item[data-loc]').forEach(item=>{
+      item.onclick = ()=>{
+        item.classList.add('right');
+        sparkles(8);
+        setTimeout(()=> goTo(3), 700);
+      };
+    });
+  }
+
+  if(s===3){ playVoice('audio03'); playSfx('rewards/brilho',[900,1200]); document.getElementById('continue-btn').onclick = ()=> goTo(4); }
+
+  if(s>=4 && s<=8){
+    const btn = document.getElementById('continue-btn');
+    if(s===4) playVoice('audio04');
+    chime([700,950]);
+    btn.onclick = ()=> goTo(s+1);
+  }
+
+  if(s===9){
+    playVoice('audio05');
+    document.getElementById('continue-btn').onclick = ()=>{
+      hearts(10); flowers(6);
+      goTo(10);
+    };
+  }
+
+  if(s===10){
+    const btn = document.getElementById('continue-btn');
+    if(btn){ playVoice('audio06'); btn.onclick = ()=> goTo(11); }
+    const wbtn = document.getElementById('word-next');
+    if(wbtn) wbtn.onclick = ()=>{ state.thankIndex++; sparkles(6); renderScene(); };
+  }
+
+  if(s===11){ renderFinalScenes(); }
+}
+
+// Cenas finais (brotinho, comemoração, abraço, gancho) — geridas fora do fluxo padrão
+// porque dependem de sub-passos internos (brotinho -> comemorar -> abraço -> gancho).
+let finalStep = 0;
+function renderFinalScenes(){
+  nextBtn.style.visibility = 'hidden';
+  if(finalStep===0){
+    cardEl.innerHTML = `
+      <div class="char-row">
+        <div class="char-frame small">${charImg(IMG.fog_comemorando)}</div>
+        <div class="char-frame small">${charImg(IMG.pipo_comemorando)}</div>
+      </div>
+      <p class="speech">"Olha! Alguma coisa está acontecendo..."</p>
+      <div class="seed-emoji" id="seed-el">🌱</div>
+      ${papaiCard('Olha! Alguma coisa está acontecendo...', 'Um pequeno brotinho verde aparece — só isso. O que ele vai virar continua sendo mistério.')}
+      <div class="btn-row"><button class="btn huge" id="water-btn">💧 Regar com gratidão</button></div>`;
+    playVoice('audio07');
+    document.getElementById('water-btn').onclick = ()=>{
+      document.getElementById('seed-el').textContent = '🌿';
+      sparkles(14); flowers(10); crystalShine(6);
+      playSfx('rewards/brilho',[1046,1568,2093]);
+      setTimeout(()=>{ finalStep=1; renderFinalScenes(); }, 1400);
+    };
+  }
+  else if(finalStep===1){
+    cardEl.innerHTML = `
+      <div class="char-row">
+        <div class="char-frame small">${charImg(IMG.fog_comemorando)}</div>
+        <div class="char-frame small">${charImg(IMG.pipo_comemorando)}</div>
+        <div class="char-frame small">${charImg(IMG.sofia_feliz)}</div>
+        <div class="char-frame small">${charImg(IMG.lili_voo)}</div>
+      </div>
+      <p class="speech">Todos juntos comemoram o novo brotinho! 🎉</p>
+      ${papaiCard('Você regou a semente com gratidão, Ester!', 'Cada clique traz uma combinação diferente de corações, flores e brilhos.')}
+      <div class="btn-row"><button class="btn huge" id="celebrate-btn">🎉 Comemorar!</button></div>
+      <div class="btn-row"><button class="nav-btn" id="hug-scene-btn">Continuar ➜</button></div>`;
+    document.getElementById('celebrate-btn').onclick = ()=>{
+      hearts(14);
+      setTimeout(()=>flowers(14), 300);
+      setTimeout(()=>sparkles(12), 600);
+      setTimeout(()=>confetti(26), 900);
+    };
+    document.getElementById('hug-scene-btn').onclick = ()=>{ finalStep=2; renderFinalScenes(); };
+  }
+  else if(finalStep===2){
+    cardEl.innerHTML = `
+      <div class="char-frame big">${charImg(IMG.fog_feliz)}</div>
+      <p class="speech" style="font-weight:800;">❤️ "Obrigado por cuidar do jardim com a gente!"</p>
+      ${papaiCard('Você regou a semente com gratidão, Ester!')}
+      <div class="btn-row"><button class="btn huge" id="hug-btn">🤗 ABRAÇO DO PAPAI</button></div>
+      <p class="speech" style="font-size:0.95rem;">❤️ 🌸 ⭐ ✨ — pode clicar quantas vezes quiser</p>
+      <div class="btn-row"><button class="nav-btn" id="ending-btn">Continuar ➜</button></div>`;
+    document.getElementById('hug-btn').onclick = ()=>{
+      state.hugClicks++;
+      hugCelebration();
+    };
+    document.getElementById('ending-btn').onclick = ()=>{ finalStep=3; renderFinalScenes(); };
+  }
+  else if(finalStep===3){
+    cardEl.innerHTML = `
+      <div class="night-card">
+        <div class="char-frame">${charImg(IMG.carvalho_acordado)}</div>
+        <p class="speech" style="font-size:0.95rem; font-style:italic;">O brotinho verde brilha baixinho à noite...<br>o Carvalho observa, em silêncio, como quem já viu isso antes.</p>
+        <p class="speech" style="font-weight:800; margin-top:14px;">Continua...</p>
+        ${papaiCard('Até a nossa próxima aventura!', 'Fade final. Som: vento + folhas + um pequeno brilho de mistério.')}
+        <div class="btn-row"><button class="nav-btn" id="restart-btn">Reviver a aventura 🔁</button></div>`;
+    playVoice('audio09');
+    document.getElementById('restart-btn').onclick = ()=>{
+      state.scene=0; state.thankIndex=0; state.hugClicks=0; finalStep=0;
+      goTo(0);
+    };
+  }
+  fillEl.style.width = '100%';
+}
+
+function goTo(idx){
+  state.scene = Math.max(0, Math.min(TOTAL_SCENES, idx));
+  renderScene();
+}
+backBtn.onclick = ()=>{
+  if(state.scene===11 && finalStep>0){ finalStep--; renderFinalScenes(); return; }
+  goTo(state.scene-1);
+};
+nextBtn.onclick = ()=> goTo(state.scene+1);
+
+renderScene();
+</script>
+</body>
+</html>

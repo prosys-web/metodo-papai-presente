@@ -126,7 +126,7 @@ Cada episódio deve trabalhar, de forma natural e integrada à narrativa, pelo m
 
 Esses valores jamais devem ser apresentados como uma lição explícita — devem surgir das escolhas, diálogos e experiências vividas pelos personagens.
 
-**Já trabalhados em episódio (evitar repetir a mesma lição sem evolução):** amizade (Ep.2, 5, 6) · cooperação (Ep.5, 6) · paciência e escuta (Ep.7) · cuidado com a natureza (Ep.7) · honestidade, responsabilidade e coragem de dizer a verdade (Ep.8).
+**Já trabalhados em episódio (evitar repetir a mesma lição sem evolução):** amizade (Ep.2, 5, 6) · cooperação (Ep.5, 6) · paciência e escuta (Ep.7) · cuidado com a natureza (Ep.7) · honestidade, responsabilidade e coragem de dizer a verdade (Ep.8) · gratidão (Ep.9).
 
 ## Princípio Pedagógico
 
@@ -195,6 +195,7 @@ Personalização automática · IA gerando episódios · painel dos responsávei
 - Episódio 4 → 5: Foguinho encontra um mapa com um X brilhando ("Será que existe um tesouro?").
 - Episódio 6 → 7: luz verde no céu conduz até o Carvalho.
 - Episódio 7 → 8: o Carvalho revela uma nova trilha, ainda não mostrada em nenhum mapa.
+- Episódio 8 → 9: a semente verde é plantada; ao final do Ep.9 um pequeno brotinho aparece — significado ainda não revelado.
 
 Todas as peças entregues desde o Episódio 2 fazem parte da coleção **Chave da Imaginação**.
 
@@ -212,5 +213,6 @@ Sua função atual é apenas criar curiosidade para episódios futuros — não 
 |---|---|---|---|
 | 7 | O Guardião das Histórias | paciência, escuta, cuidado com a natureza | Carvalho, Tito |
 | 8 | O Segredo da Coelhinha Sofia | honestidade, responsabilidade, coragem para dizer a verdade | Sofia, Semente Verde |
+| 9 | O Jardim da Gratidão | gratidão | nenhum personagem novo — elenco completo reunido |
 
-*Episódios 7 e 8 já produzidos em HTML. Arte de Tito e Sofia ainda em versão 3D provisória — troca para 2D flat pendente de entrega das novas imagens.*
+*Episódios 7, 8 e 9 já produzidos em HTML. Arte de Tito e Sofia ainda em versão 3D provisória — troca para 2D flat pendente de entrega das novas imagens.*
