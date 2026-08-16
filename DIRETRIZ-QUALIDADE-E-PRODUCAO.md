@@ -30,6 +30,16 @@ Exemplos:
 
 Isso evita retrabalho e faz a plataforma crescer de forma organizada — cada episódio novo deve deixar a biblioteca mais rica, não apenas produzir mais um arquivo isolado.
 
+## Checagem de Cobertura Sonora (a partir do Episódio 11)
+
+Antes de finalizar qualquer episódio: todo personagem que aparece em cena
+deve ter pelo menos um som real (arquivo da biblioteca) tocado em algum
+momento — não só voz sintética via `chime()`. Se o personagem ainda não
+tem som próprio, reaproveitar um som ambiente é aceitável, mas silêncio
+total não é. Motivo: no Ep.9 e Ep.10 o Foguinho apareceu em várias cenas
+sem nenhum som seu tocar, apesar de já ter 6 arquivos reais na biblioteca
+— descuido identificado pelo Severo, não falta de material.
+
 ## Nota de viabilidade técnica (avaliação honesta, ago/2026)
 
 O que os Episódios 1–4 entregam hoje — SVG simples com 1–2 CSS keyframes, chimes sintetizados via Web Audio API, tudo em HTML único — cumpre bem as dimensões de **Vínculo, Diversão, Desenvolvimento e Valores**, mas **ainda não chega** ao padrão visual/sonoro descrito nesta diretriz (piscadas, sobrancelhas móveis, respiração, parallax cinematográfico, trilha sonora por cenário, identidade sonora por personagem). Isso não é uma questão de esforço de código — é um patamar de produção diferente:

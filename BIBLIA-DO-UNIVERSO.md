@@ -26,6 +26,8 @@ A consistência narrativa é um dos pilares da experiência. A criança deve sen
 
 **Assets aprovados:** `assets/characters/aurora/aurora-sorrindo.webp` ✅
 
+**Sons próprios:** `aurora-bater-asas.mp3` ✅, `aurora-sino.mp3` ✅ (recebidos em 16/08). Falta ainda `aurora-pouso.mp3`.
+
 ### 🐉 Foguinho — O Pequeno Dragão
 
 **Papel:** representa coragem, gentileza, autoconfiança. Aprende junto com Ester.
@@ -86,6 +88,8 @@ Muito inteligente, muito agitado. Está sempre construindo alguma invenção e q
 
 **Poses recebidas:** oficial, correndo, pensando, apontando, comemorando ✅
 
+**Sons próprios:** `pipo-mecanismo-clique.mp3` ✅ (primeiro som de assinatura do personagem, recebido em 16/08 — antes reaproveitava sons genéricos)
+
 ### 🐘 Tito — O Elefantinho
 
 **Espécie:** pequeno elefante cinza.
@@ -98,7 +102,7 @@ Muito inteligente, muito agitado. Está sempre construindo alguma invenção e q
 
 **Poses recebidas:** oficial, caminhando, curioso, pensando, surpreso, comemorando ✅
 
-⚠️ **Nota de estilo (BLOQUEANTE, decisão em andamento):** as imagens do Tito são renderização 3D realista (estilo CGI), incompatível com o padrão "desenho infantil 2D premium" do resto do elenco. **Decisão tomada em 12/08: regenerar em 2D flat** (mesma decisão da Sofia). Prompt já entregue ao Severo — aguardando as imagens novas.
+⚠️ **Nota de estilo (decisão consciente, não bloqueante):** as imagens do Tito são renderização 3D realista (estilo CGI), incompatível com o padrão "desenho infantil 2D premium" do resto do elenco. **Decisão revisada em 16/08:** mantido o 3D por ora, mesmo raciocínio da Sofia — sem prejuízo pra experiência da Ester hoje. Ajuste pontual para 2D planejado pro futuro breve. Prompt de regeneração já documentado.
 
 ### 🐰 Sofia — A Coelhinha
 
@@ -112,9 +116,9 @@ Muito inteligente, muito agitado. Está sempre construindo alguma invenção e q
 
 **Representa:** honestidade, responsabilidade, coragem de reconhecer um erro.
 
-**Poses recebidas:** oficial, curiosa, tímida, feliz, entregando-semente ✅
+**Poses recebidas:** oficial, curiosa, tímida, feliz, entregando-semente, vestido-rosa, feliz-vestido-semente, tímida-vestido, curiosa-vestido ✅
 
-⚠️ **Nota de estilo (BLOQUEANTE, decisão em andamento):** mesmo caso do Tito — imagens em renderização 3D realista (CGI), incompatível com o padrão 2D flat do resto do elenco. **Decisão tomada em 12/08: regenerar em 2D flat.** Prompts já entregues ao Severo (Sofia e Tito) — episódio 8 foi produzido com a arte 3D provisória enquanto a versão 2D não chega; troca de arquivo planejada assim que as novas imagens chegarem (mesmos nomes de arquivo, sem necessidade de editar o HTML do episódio).
+⚠️ **Nota de estilo (decisão consciente, não bloqueante):** mesmo caso do Tito — imagens em renderização 3D realista (CGI), incompatível com o padrão 2D flat do resto do elenco. **Decisão revisada em 16/08:** mantido o 3D por ora — sem prejuízo perceptível pra experiência da Ester, que é o critério imediato. Ajuste pontual para 2D fica planejado pro futuro breve, quando o critério de avaliação do projeto for além da experiência dela (ex: apresentação como produto/ativo estratégico). Prompts de regeneração em 2D já documentados e prontos para quando for retomado.
 
 ## Filosofia do Universo
 
@@ -214,5 +218,6 @@ Sua função atual é apenas criar curiosidade para episódios futuros — não 
 | 7 | O Guardião das Histórias | paciência, escuta, cuidado com a natureza | Carvalho, Tito |
 | 8 | O Segredo da Coelhinha Sofia | honestidade, responsabilidade, coragem para dizer a verdade | Sofia, Semente Verde |
 | 9 | O Jardim da Gratidão | gratidão | nenhum personagem novo — elenco completo reunido |
+| 10 | O Vestido da Sofia | gratidão na prática (receber → perceber → agradecer), sem lição nova | nenhum personagem novo — vestido rosa (item de guarda-roupa) |
 
-*Episódios 7, 8 e 9 já produzidos em HTML. Arte de Tito e Sofia ainda em versão 3D provisória — troca para 2D flat pendente de entrega das novas imagens.*
+*Episódios 7 a 10 já produzidos em HTML. Arte de Tito e Sofia mantida em 3D por decisão consciente (16/08) — sem prejuízo à experiência da Ester; ajuste para 2D fica planejado para quando o critério de avaliação for além da experiência dela.*
