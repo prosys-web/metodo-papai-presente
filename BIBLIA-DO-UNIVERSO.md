@@ -219,5 +219,7 @@ Sua função atual é apenas criar curiosidade para episódios futuros — não 
 | 8 | O Segredo da Coelhinha Sofia | honestidade, responsabilidade, coragem para dizer a verdade | Sofia, Semente Verde |
 | 9 | O Jardim da Gratidão | gratidão | nenhum personagem novo — elenco completo reunido |
 | 10 | O Vestido da Sofia | gratidão na prática (receber → perceber → agradecer), sem lição nova | nenhum personagem novo — vestido rosa (item de guarda-roupa) |
+| 11 | A Trilha das Perguntas | curiosidade (perguntar sem medo de não saber) | nenhum personagem novo — retorno do Tito |
+| 12 | O Dia dos Amigos | amizade (celebração, não lição nova) | nenhum personagem novo — episódio comemorativo, elenco completo |
 
-*Episódios 7 a 10 já produzidos em HTML. Arte de Tito e Sofia mantida em 3D por decisão consciente (16/08) — sem prejuízo à experiência da Ester; ajuste para 2D fica planejado para quando o critério de avaliação for além da experiência dela.*
+*Episódios 7 a 12 já produzidos em HTML.*

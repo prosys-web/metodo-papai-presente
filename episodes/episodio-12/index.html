@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Método Presença — As Aventuras de Ester — Ep. 12</title>
+<link rel="stylesheet" href="../../css/base.css">
+<!--
+  Episódio 12 — O Dia dos Amigos 🎉 (episódio comemorativo)
+  Sem personagem novo. Elenco completo reunido.
+  Valor: amizade — celebração, não lição nova.
+  Continuidade: os brotinhos do Ep.11 desabrocham juntos hoje — ainda
+  sem explicação, só a ocasião da festa. Mistério segue intacto.
+
+  ÁUDIO DO PAPAI — pasta audio/ ao lado deste arquivo:
+    audio01.mp3  "Hoje os brotinhos estão brilhando diferente..."
+    audio02.mp3  "Hoje é um dia especial. Vamos chamar todo mundo!"
+    audio03.mp3  "Olha só quem chegou!"
+    audio04.mp3  "Eles desabrocharam... juntos!"
+    audio05.mp3  "Cada amigo trouxe um pedacinho de carinho hoje."
+    audio06.mp3  "Quem você quer abraçar primeiro, Ester?"
+    audio07.mp3  "Feliz Dia dos Amigos!"
+    audio08.mp3  "Você tem os amigos mais especiais do mundo, Ester!"
+    audio09.mp3  "Até a nossa próxima aventura!"
+-->
+<style>
+  :root{
+    --ceu1:#FFF7E0; --ceu2:#FFEBB0; --ceu3:#FFDD80;
+    --creme:#FFFBF2; --gold:#F2A93C; --gold-dark:#C97A12;
+    --rosa:#F26FA0; --azul:#4E7FE0; --verde:#1F7A4D; --ameixa:#2B1F0A;
+  }
+  html,body{ background: linear-gradient(180deg, var(--ceu3) 0%, var(--ceu2) 45%, var(--ceu1) 100%); color:var(--ameixa); }
+  #progress-fill{ background: linear-gradient(90deg, var(--rosa), var(--gold), var(--azul), var(--verde)); }
+  h1.title-plaque{ color:var(--gold-dark); border:4px dashed var(--gold); }
+  .episode-tag{ background:var(--gold); }
+  p.speech{ color:var(--ameixa); }
+  .papai-card{ background:#FFF6E5; border-color:var(--gold); color:var(--gold-dark); }
+  .papai-card .tag{ background:var(--gold); }
+  .btn{ background:linear-gradient(180deg,var(--gold),var(--gold-dark)); box-shadow:0 6px 0 #8A5308,0 8px 16px rgba(0,0,0,0.15); }
+  .btn.secondary{ background:linear-gradient(180deg,#FF9EC4,var(--rosa)); box-shadow:0 6px 0 #A8355F,0 8px 16px rgba(0,0,0,0.15); color:#fff; }
+  .card{ background:var(--creme); }
+  #sky{ position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+  .hill-em{ position:absolute; bottom:0; left:0; width:100%; height:20%; background:var(--gold); border-radius:50% 50% 0 0/100% 100% 0 0; transform:scaleX(1.4); opacity:0.18; }
+  .char-frame{ display:flex; justify-content:center; margin:4px 0 8px; }
+  .char-frame img{ width:92px; height:auto; border-radius:18px; background:#fff; padding:5px; box-shadow:0 5px 12px rgba(60,40,10,0.18); animation:char-bounce 2s ease-in-out infinite; }
+  .char-frame.small img{ width:56px; }
+  .char-frame.big img{ width:135px; }
+  @keyframes char-bounce{ 0%,100%{ transform:translateY(0) rotate(-2deg);} 50%{ transform:translateY(-8px) rotate(2deg);} }
+  .char-row{ display:flex; justify-content:center; gap:8px; align-items:flex-end; margin-bottom:6px; flex-wrap:wrap; }
+  .sprouts-row{ display:flex; justify-content:center; gap:8px; font-size:1.8rem; flex-wrap:wrap; margin:10px 0; }
+  .night-card{ background:radial-gradient(ellipse at top, #C97A12, #3A2508); border-radius:32px; padding:24px 20px; color:#fff; }
+  .night-card p.speech{ color:#FFF6E5; }
+  .night-card .papai-card{ background:rgba(255,255,255,0.16); border-color:#FFF6E5; color:#FFF6E5; }
+  .night-card .papai-card .tag{ background:#FFF6E5; color:var(--gold-dark); }
+  @media (max-width:360px){ h1.title-plaque{ font-size:1.15rem;} }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="sky"><div class="hill-em"></div></div>
+  <button id="info-btn" title="Instruções para o papai">ℹ️</button>
+  <div id="progress-wrap"><div id="progress-track"><div id="progress-fill"></div></div></div>
+  <div id="stage"><div class="card" id="card"></div></div>
+  <div id="nav">
+    <button class="nav-btn" id="btn-back">◀ Voltar</button>
+    <div class="nav-spacer"></div>
+    <button class="nav-btn" id="btn-next">Próximo ▶</button>
+  </div>
+</div>
+<div id="info-modal">
+  <div class="box">
+    <h3>🎙️ Voz do papai (opcional)</h3>
+    <p>Pasta <code>episodes/episodio-12/audio/</code>, audio01 a audio09 — texto no código-fonte.</p>
+    <p>Episódio comemorativo — elenco completo, sem lição nova, só celebração de amizade.</p>
+    <button class="btn secondary" onclick="document.getElementById('info-modal').classList.remove('open')">Entendi!</button>
+  </div>
+</div>
+<script src="../../js/core.js"></script>
+<script>
+const IMG = {
+  aurora: '../../assets/characters/aurora/aurora-sorrindo.webp',
+  lumi: '../../assets/characters/lumi/lumi-sorrindo.webp',
+  lili: '../../assets/characters/lili/lili-voo-feliz.webp',
+  fog_feliz: '../../assets/characters/foguinho/foguinho-feliz.webp',
+  fog_comemorando: '../../assets/characters/foguinho/foguinho-comemorando.webp',
+  fog_empolgado: '../../assets/characters/foguinho/foguinho-empolgado.webp',
+  pipo: '../../assets/characters/pipo/pipo-comemorando.webp',
+  sofia: '../../assets/characters/sofia/sofia-feliz.webp',
+  carvalho: '../../assets/characters/carvalho/carvalho-acordado-sorrindo.webp',
+  tito: '../../assets/characters/tito/tito-comemorando.webp',
+};
+function charImg(src, cls){ return `<img src="${src}" alt="" class="${cls||''}">`; }
+const state = { scene:0, hugClicks:0 };
+const cardEl = document.getElementById('card');
+const fillEl = document.getElementById('progress-fill');
+const backBtn = document.getElementById('btn-back');
+const nextBtn = document.getElementById('btn-next');
+const skyEl = document.getElementById('sky');
+const TOTAL_SCENES = 9;
+document.getElementById('info-btn').onclick = ()=> document.getElementById('info-modal').classList.add('open');
+seedBackgroundStars(skyEl, 8);
+
+function renderScene(){
+  const s = state.scene;
+  backBtn.style.visibility = (s===0) ? 'hidden' : 'visible';
+  nextBtn.style.visibility = 'visible';
+  fillEl.style.width = (s/TOTAL_SCENES*100)+'%';
+  let html = '';
+
+  if(s===0){
+    nextBtn.style.visibility = 'hidden';
+    html = `
+      <div class="sprouts-row">🌱✨🌱✨🌱</div>
+      <p class="speech">Hoje os brotinhos estão brilhando diferente... mais fortes que nunca.</p>
+      ${papaiCard('Hoje os brotinhos estão brilhando diferente...', 'Manhã ensolarada, clima de festa no ar, sem explicar o porquê ainda.')}
+      <div class="btn-row"><button class="btn huge" id="continue-btn">✨ Continuar</button></div>`;
+  }
+  else if(s===1){
+    html = `
+      <div class="char-frame big">${charImg(IMG.carvalho)}</div>
+      <p class="speech" style="font-weight:800;">"Hoje é um dia especial. Vamos chamar todo mundo!"</p>
+      ${papaiCard('Hoje é um dia especial. Vamos chamar todo mundo!', 'O Carvalho anuncia — sem revelar o motivo, só o convite.')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Chamar os amigos ➜</button></div>`;
+  }
+  else if(s===2){
+    html = `
+      <div class="char-row">
+        <div class="char-frame">${charImg(IMG.fog_feliz)}</div>
+        <div class="char-frame small">${charImg(IMG.lili)}</div>
+        <div class="char-frame small">${charImg(IMG.lumi)}</div>
+        <div class="char-frame">${charImg(IMG.pipo)}</div>
+        <div class="char-frame small">${charImg(IMG.sofia)}</div>
+        <div class="char-frame">${charImg(IMG.tito)}</div>
+      </div>
+      <p class="speech" style="font-weight:800;">"Olha só quem chegou!"</p>
+      ${papaiCard('Olha só quem chegou!', 'Todo mundo se reúne perto da árvore do Carvalho.')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  else if(s===3){
+    html = `
+      <div class="sprouts-row">🌸🌱✨🌱🌸</div>
+      <p class="speech" style="font-weight:800;">"Eles desabrocharam... juntos!"</p>
+      <p class="speech" style="font-size:0.9rem; font-style:italic;">Todos os brotinhos abrem ao mesmo tempo — ninguém sabe explicar por quê, mas todo mundo sorri.</p>
+      ${papaiCard('Eles desabrocharam... juntos!', 'O grande momento visual do episódio. Não explique nada sobre o porquê.')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  else if(s===4){
+    html = `
+      <div class="char-row">
+        <div class="char-frame">${charImg(IMG.fog_empolgado)}</div>
+        <div class="char-frame small">${charImg(IMG.lili)}</div>
+        <div class="char-frame">${charImg(IMG.pipo)}</div>
+      </div>
+      <p class="speech">"Cada amigo trouxe um pedacinho de carinho hoje."</p>
+      <p class="speech" style="font-size:0.9rem; font-style:italic;">Foguinho traz uma flor de fogo (sem queimar nada!) · Lili traz uma folha brilhante · Pipo traz uma invenção que faz cócegas de tão engraçada.</p>
+      ${papaiCard('Cada amigo trouxe um pedacinho de carinho hoje.', null)}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  else if(s===5){
+    html = `
+      <div class="char-row">
+        <div class="char-frame small">${charImg(IMG.sofia)}</div>
+        <div class="char-frame">${charImg(IMG.tito)}</div>
+        <div class="char-frame small">${charImg(IMG.carvalho)}</div>
+      </div>
+      <p class="speech" style="font-size:0.9rem; font-style:italic;">Sofia traz um abraço apertadinho · Tito traz um passeio nas costas dele · Carvalho traz uma história nova pra contar depois.</p>
+      ${papaiCard(null, 'Cada personagem contribui com algo pequeno e afetivo — sem virar uma lista longa demais.')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  else if(s===6){
+    html = `
+      <p class="speech">Quem você quer abraçar primeiro, Ester?</p>
+      ${conversaCard('Qual desses amigos você quer abraçar primeiro?')}
+      <div class="btn-row"><button class="btn secondary" id="continue-btn">Todo mundo junto! ➜</button></div>`;
+  }
+  else if(s===7){
+    html = `
+      <div class="char-row">
+        <div class="char-frame small">${charImg(IMG.fog_comemorando)}</div>
+        <div class="char-frame small">${charImg(IMG.lili)}</div>
+        <div class="char-frame small">${charImg(IMG.lumi)}</div>
+        <div class="char-frame small">${charImg(IMG.pipo)}</div>
+        <div class="char-frame small">${charImg(IMG.sofia)}</div>
+        <div class="char-frame small">${charImg(IMG.tito)}</div>
+        <div class="char-frame small">${charImg(IMG.carvalho)}</div>
+      </div>
+      <p class="speech" style="font-weight:800; font-size:1.2rem;">🎉 Feliz Dia dos Amigos! 🎉</p>
+      ${papaiCard('Feliz Dia dos Amigos!', 'A maior comemoração da série até agora — todos os efeitos, em camadas.')}
+      <div class="btn-row"><button class="btn huge" id="celebrate-btn">🎉 Comemorar!</button></div>
+      <div class="btn-row"><button class="nav-btn" id="continue-btn">Continuar ➜</button></div>`;
+  }
+  else if(s===8){
+    nextBtn.style.visibility = 'hidden';
+    html = `
+      <div class="char-frame big">${charImg(IMG.fog_feliz)}</div>
+      <p class="speech" style="font-weight:800;">❤️ "Você tem os amigos mais especiais do mundo!"</p>
+      ${papaiCard('Você tem os amigos mais especiais do mundo, Ester!')}
+      <div class="btn-row"><button class="btn huge" id="hug-btn">🤗 ABRAÇO DO PAPAI</button></div>
+      <p class="speech" style="font-size:0.95rem;">❤️ 🌸 ⭐ ✨ — pode clicar quantas vezes quiser</p>
+      <div class="btn-row"><button class="nav-btn" id="ending-btn">Continuar ➜</button></div>`;
+  }
+  else if(s===9){
+    nextBtn.style.visibility = 'hidden';
+    html = `
+      <div class="night-card">
+        <div class="sprouts-row">🌸✨🌸</div>
+        <p class="speech" style="font-size:0.95rem; font-style:italic;">Os brotinhos, agora floridos, brilham suavemente enquanto a noite chega...</p>
+        <p class="speech" style="font-weight:800; margin-top:14px;">Continua...</p>
+        ${papaiCard('Até a nossa próxima aventura!', 'Fade final. Som: vento leve.')}
+        <div class="btn-row"><button class="nav-btn" id="restart-btn">Reviver a aventura 🔁</button></div>
+      </div>`;
+  }
+
+  cardEl.innerHTML = html;
+  attachSceneEvents();
+}
+
+function attachSceneEvents(){
+  const s = state.scene;
+  if(s===0){ playVoice('audio01'); crystalShine(6); document.getElementById('continue-btn').onclick = ()=> goTo(1); }
+  if(s===1){ playVoice('audio02'); playSfx('characters/carvalho-madeira-tronco',[200,150]); document.getElementById('continue-btn').onclick = ()=> goTo(2); }
+  if(s===2){
+    playVoice('audio03');
+    playSfx('characters/foguinho-asas',[500,650]);
+    setTimeout(()=>playSfx('characters/aurora-pouso',[400,300]), 300);
+    setTimeout(()=>playSfx('characters/lumi-notas-musicais',[700,900,1100]), 600);
+    setTimeout(()=>playSfx('characters/pipo-mecanismo-clique',[500,650]), 900);
+    setTimeout(()=>playSfx('characters/tito-passos',[200,180]), 1200);
+    document.getElementById('continue-btn').onclick = ()=> goTo(3);
+  }
+  if(s===3){ playVoice('audio04'); playSfx('characters/lumi-brilho-cintilante',[900,1200,1500]); sparkles(14); flowers(10); document.getElementById('continue-btn').onclick = ()=> goTo(4); }
+  if(s===4){ playVoice('audio05'); playSfx('characters/foguinho-labareda',[600,500]); document.getElementById('continue-btn').onclick = ()=> goTo(5); }
+  if(s===5){ playSfx('characters/tito-elefantinho',[440,660]); document.getElementById('continue-btn').onclick = ()=> goTo(6); }
+  if(s===6){ playVoice('audio06'); document.getElementById('continue-btn').onclick = ()=> goTo(7); }
+  if(s===7){
+    playVoice('audio07');
+    document.getElementById('celebrate-btn').onclick = ()=>{
+      hearts(16);
+      setTimeout(()=>flowers(16), 250);
+      setTimeout(()=>sparkles(16), 500);
+      setTimeout(()=>confetti(34), 750);
+      setTimeout(()=>crystalShine(10), 1000);
+      setTimeout(()=>fireworksSoft(3), 1300);
+      setTimeout(()=>playSfx('rewards/brilho',[900,1200,1600]), 1500);
+    };
+    document.getElementById('continue-btn').onclick = ()=>{ playVoice('audio08'); goTo(8); };
+  }
+  if(s===8){
+    document.getElementById('hug-btn').onclick = ()=>{ state.hugClicks++; hugCelebration(); };
+    document.getElementById('ending-btn').onclick = ()=> goTo(9);
+  }
+  if(s===9){
+    playVoice('audio09');
+    document.getElementById('restart-btn').onclick = ()=>{ state.scene=0; state.hugClicks=0; goTo(0); };
+  }
+}
+function goTo(idx){ state.scene = Math.max(0, Math.min(TOTAL_SCENES, idx)); renderScene(); }
+backBtn.onclick = ()=> goTo(state.scene-1);
+nextBtn.onclick = ()=> goTo(state.scene+1);
+renderScene();
+</script>
+</body>
+</html>
